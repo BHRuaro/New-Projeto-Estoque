@@ -25,6 +25,7 @@ public class DAO<T> {
         return this.em.find(classe, id);
     }
 
+    @Transactional
     public List<T> list() {
         return em.createQuery("from " + classe.getName(), classe).getResultList();
     }
