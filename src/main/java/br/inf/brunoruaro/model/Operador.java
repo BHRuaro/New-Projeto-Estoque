@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import java.sql.Date;
 
+
 @ApplicationScoped
 @Entity
 @Table(name = "operador")

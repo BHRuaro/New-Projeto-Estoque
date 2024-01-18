@@ -3,13 +3,14 @@ package br.inf.brunoruaro.model;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Dependent
 public class DAO<T> {
 
-    @Inject
+    @PersistenceContext(unitName = "bruno-ruaro")
     EntityManager em;
     private final Class<T> classe;
 
@@ -17,17 +18,14 @@ public class DAO<T> {
         this.classe = classe;
     }
 
-    public DAO() {
-        this.classe = null;
-    }
-
+    @Transactional
     public T find(Integer id) {
         return this.em.find(classe, id);
     }
 
     @Transactional
     public List<T> list() {
-        return em.createQuery("from " + classe.getName(), classe).getResultList();
+        return em.createQuery("select a from " + classe.getName() + "a", classe).getResultList();
     }
 
     @Transactional

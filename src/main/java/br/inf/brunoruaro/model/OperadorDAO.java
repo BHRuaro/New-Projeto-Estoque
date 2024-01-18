@@ -1,17 +1,18 @@
 package br.inf.brunoruaro.model;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-
 import java.util.List;
 import java.util.HashMap;
 
+@RequestScoped
 public class OperadorDAO {
 
     @Inject
     private final DAO<Operador> dao;
 
     public OperadorDAO() {
-        this.dao = new DAO<>(Operador.class);
+        this.dao = new DAO<Operador>(Operador.class);
     }
 
     public Operador find(Integer id) {
