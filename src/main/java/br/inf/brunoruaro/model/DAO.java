@@ -1,31 +1,27 @@
 package br.inf.brunoruaro.model;
 
 import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.List;
 
-@Dependent
-public class DAO<T> {
+public abstract class DAO<T> {
 
-    @PersistenceContext(unitName = "bruno-ruaro")
+    @Inject
     EntityManager em;
-    private final Class<T> classe;
 
-    public DAO(Class<T> classe) {
-        this.classe = classe;
-    }
+    public abstract Class<T> getEntityClass();
 
     @Transactional
     public T find(Integer id) {
-        return this.em.find(classe, id);
+        return this.em.find(getEntityClass(), id);
     }
 
     @Transactional
     public List<T> list() {
-        return em.createQuery("select a from " + classe.getName() + "a", classe).getResultList();
+        return em.createQuery("select a from " + getEntityClass().getName() + " a ", getEntityClass()).getResultList();
     }
 
     @Transactional

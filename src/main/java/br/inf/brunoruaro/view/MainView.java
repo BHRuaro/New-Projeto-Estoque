@@ -9,8 +9,11 @@ public class MainView {
 
     public static void login() {
         boolean login = false;
+
+        OperadorController operadorController = new OperadorController();
+
         do {
-            login = OperadorController.validateLogin();
+            login = operadorController.validateLogin();
         } while (!login);
     }
 

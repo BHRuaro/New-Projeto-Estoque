@@ -4,16 +4,21 @@ import java.util.HashMap;
 import br.inf.brunoruaro.model.OperadorDAO;
 import br.inf.brunoruaro.view.OperadorView;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.spi.CDI;
+import jakarta.inject.Inject;
 
 @RequestScoped
 public class OperadorController {
+
+    @Inject
+    OperadorDAO operadorDAO;
+
     static HashMap<String, String> parameters = new HashMap<>();
 
-    public static boolean validateLogin() {
+    public boolean validateLogin() {
 
         parameters = OperadorView.requestLogin();
-
-        if(OperadorDAO.login(parameters)){
+        if(operadorDAO.login(parameters)){
             return true;
         }else{
             OperadorView.invalidLogin();

@@ -6,40 +6,32 @@ import java.util.List;
 import java.util.HashMap;
 
 @RequestScoped
-public class OperadorDAO {
-
-    @Inject
-    private final DAO<Operador> dao;
-
-    public OperadorDAO() {
-        this.dao = new DAO<Operador>(Operador.class);
+public class OperadorDAO extends DAO<Operador>{
+    @Override
+    public Class<Operador> getEntityClass() {
+        return Operador.class;
     }
 
     public Operador find(Integer id) {
-        return this.dao.find(id);
+        return this.find(id);
     }
 
     public void add(Operador operador) {
-        this.dao.add(operador);
+        this.add(operador);
     }
 
     public void remove(Operador operador) {
-        this.dao.remove(operador);
+        this.remove(operador);
     }
 
     public Operador update(Operador operador) {
-        return this.dao.update(operador);
+        return this.update(operador);
     }
 
-    public List<Operador> list() {
-        return this.dao.list();
-    }
-
-    public static boolean login(HashMap<String, String> parameters) {
+    public boolean login(HashMap<String, String> parameters) {
         String user = parameters.get("user");
         String password = parameters.get("password");
-        OperadorDAO operadorDAO = new OperadorDAO();
-        List<Operador> operadores = operadorDAO.list();
+        List<Operador> operadores = this.list();
         for (Operador operador : operadores) {
             if (operador.getNome().equals(user) && operador.getSenha().equals(password)) {
                 return true;
