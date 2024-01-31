@@ -39,7 +39,7 @@ create table movimentacoes (
 	quantidade int not null
 );
 
-CREATE TABLE tipoMovimentacao (
+CREATE TABLE tipo_movimentacao (
     tipo_movimentacao_id serial PRIMARY KEY,
     descricao VARCHAR(50) NOT NULL
 );

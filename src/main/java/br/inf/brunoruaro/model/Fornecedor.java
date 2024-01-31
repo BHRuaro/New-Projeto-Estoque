@@ -22,7 +22,7 @@ public class Fornecedor {
     @Column
     private Long cnpj;
 
-    @OneToMany(mappedBy = "operador")
+    @OneToMany(mappedBy = "fornecedor")
     private List<Item> itens;
 
     public Fornecedor() {

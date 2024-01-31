@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class TipoMovimentacao {
 
     @Column(name = "tipo_movimentacao_id")
+    @Id
     private Integer tipoMovimentacaoId;
 
     @Column
