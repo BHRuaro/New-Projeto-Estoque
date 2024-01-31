@@ -13,19 +13,19 @@ public class OperadorDAO extends DAO<Operador>{
     }
 
     public Operador find(Integer id) {
-        return this.find(id);
+        return super.find(id);
     }
 
     public void add(Operador operador) {
-        this.add(operador);
+        super.add(operador);
     }
 
     public void remove(Operador operador) {
-        this.remove(operador);
+        super.remove(operador);
     }
 
     public Operador update(Operador operador) {
-        return this.update(operador);
+        return super.update(operador);
     }
 
     public boolean login(HashMap<String, String> parameters) {

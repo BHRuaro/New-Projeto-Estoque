@@ -14,27 +14,23 @@ public abstract class DAO<T> {
 
     public abstract Class<T> getEntityClass();
 
-    @Transactional
     public T find(Integer id) {
         return this.em.find(getEntityClass(), id);
     }
 
-    @Transactional
     public List<T> list() {
         return em.createQuery("select a from " + getEntityClass().getName() + " a ", getEntityClass()).getResultList();
     }
 
-    @Transactional
     public void add(T t) {
         em.persist(t);
+        em.flush();
     }
 
-    @Transactional
     public void remove(T t) {
         em.remove(t);
     }
 
-    @Transactional
     public T update(T t) {
         return em.merge(t);
     }

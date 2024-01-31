@@ -11,13 +11,12 @@ import jakarta.persistence.OneToMany;
 import java.sql.Date;
 
 
-@ApplicationScoped
 @Entity
 @Table(name = "operador")
 public class Operador {
+    @Column(name = "operador_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int operador_id;
+    private Integer operadorId;
     @Column
     private String nome;
     @Column
@@ -25,7 +24,7 @@ public class Operador {
     @Column
     private String cargo;
     @Column
-    private float salario;
+    private Float salario;
     @Column
     private java.sql.Date data_contratacao;
 
@@ -37,7 +36,7 @@ public class Operador {
 
     public Operador(int operador_id, String nome, String senha, String cargo, float salario,
                     java.sql.Date data_contratacao) {
-        this.operador_id = operador_id;
+        this.operadorId = operador_id;
         this.nome = nome;
         this.senha = senha;
         this.cargo = cargo;
@@ -45,12 +44,12 @@ public class Operador {
         this.data_contratacao = data_contratacao;
     }
 
-    public int getOperador_id() {
-        return operador_id;
+    public int getOperadorId() {
+        return operadorId;
     }
 
-    public void setOperador_id(int operador_id) {
-        this.operador_id = operador_id;
+    public void setOperadorId(Integer operadorId) {
+        this.operadorId = operadorId;
     }
 
     public String getNome() {
@@ -95,6 +94,6 @@ public class Operador {
 
     @Override
     public String toString() {
-        return "Operador" + operador_id + " - " + nome;
+        return "Operador" + operadorId + " - " + nome;
     }
 }
