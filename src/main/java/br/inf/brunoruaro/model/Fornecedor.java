@@ -4,6 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+
 
 @Entity
 @Table(name = "fornecedor")
@@ -19,8 +22,8 @@ public class Fornecedor {
     @Column
     private Long cnpj;
 
-    //OneToMany(mappedBy = "operador")
-    //private List<Item> itens;
+    @OneToMany(mappedBy = "operador")
+    private List<Item> itens;
 
     public Fornecedor() {
     }

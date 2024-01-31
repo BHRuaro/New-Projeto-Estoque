@@ -1,11 +1,9 @@
 package br.inf.brunoruaro.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -15,9 +13,9 @@ public class Item {
     @Id
     private Integer itemId;
 
-    //@ManyToOne(cascade = CascadeType.DETACH)
-    //@JoinColumn(name = "fornecedor_id", referencedColumnName = "fornecedor_id")
-    //private Fornecedor fornecedor;
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "fornecedor_id", referencedColumnName = "fornecedor_id")
+    private Fornecedor fornecedor;
 
     @Column
     private String nome;
@@ -33,6 +31,15 @@ public class Item {
 
     @Column(name = "data_validade")
     private Date dataValidade;
+
+    @OneToMany(mappedBy = "item")
+    private List<Movimentacao> movimentacoes;
+
+    @OneToMany(mappedBy = "item")
+    private List<HistoricoCadastros> historicoCadastros;
+
+    @OneToMany(mappedBy = "item")
+    private List<HistoricoMovimentacoes> historicoMovimentacoes;
 
     public Item() {
     }

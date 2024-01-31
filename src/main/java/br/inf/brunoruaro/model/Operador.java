@@ -5,6 +5,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import java.sql.Date;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 
 @Entity
@@ -24,13 +26,19 @@ public class Operador {
     @Column
     private java.sql.Date data_contratacao;
 
-//    @OneToMany(mappedBy = "operador")
-//    private List<Movimentacao> movimentacoes;
+    @OneToMany(mappedBy = "operador")
+    private List<Movimentacao> movimentacoes;
+
+    @OneToMany(mappedBy = "operador")
+    private List<HistoricoCadastros> historicoCadastros;
+
+    @OneToMany(mappedBy = "operador")
+    private List<HistoricoMovimentacoes> historicoMovimentacoes;
 
     public Operador() {
     }
 
-    public Operador(int operador_id, String nome, String senha, String cargo, float salario,
+    public Operador(Integer operador_id, String nome, String senha, String cargo, float salario,
                     java.sql.Date data_contratacao) {
         this.operadorId = operador_id;
         this.nome = nome;
@@ -40,7 +48,7 @@ public class Operador {
         this.data_contratacao = data_contratacao;
     }
 
-    public int getOperadorId() {
+    public Integer getOperadorId() {
         return operadorId;
     }
 
