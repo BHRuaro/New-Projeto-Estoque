@@ -1,7 +1,6 @@
 package br.inf.brunoruaro.model;
 
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Inject;
 import java.util.List;
 import java.util.HashMap;
 

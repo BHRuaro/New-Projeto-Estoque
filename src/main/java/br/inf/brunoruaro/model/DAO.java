@@ -1,10 +1,7 @@
 package br.inf.brunoruaro.model;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import java.util.List;
 
 public abstract class DAO<T> {
