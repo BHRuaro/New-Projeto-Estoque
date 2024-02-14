@@ -2,7 +2,6 @@ package br.inf.brunoruaro.model;
 
 import jakarta.enterprise.context.RequestScoped;
 import java.util.List;
-import java.util.HashMap;
 
 @RequestScoped
 public class OperadorDAO extends DAO<Operador> {
