@@ -17,6 +17,26 @@ public class OperadorController {
         return operador.getOperadorId();
     }
 
+    public Operador operadorFind(Integer operadorId){
+        return operadorDAO.find(operadorId);
+    }
+
+    public void operadorRemove(Integer operadorId){
+        Operador operador = operadorDAO.find(operadorId);
+        operadorDAO.remove(operador);
+    }
+
+    public Operador operadorUpdate(Operador operador){
+        return operadorDAO.update(operador);
+    }
+
+    public Object operadorList(){
+        return operadorDAO.list();
+    }
+
+    public boolean operadorLogin(Operador operador){
+        return operadorDAO.login(operador);
+    }
 
 }
 

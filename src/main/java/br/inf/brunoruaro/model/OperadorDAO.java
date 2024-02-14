@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.HashMap;
 
 @RequestScoped
-public class OperadorDAO extends DAO<Operador>{
+public class OperadorDAO extends DAO<Operador> {
     @Override
     public Class<Operador> getEntityClass() {
         return Operador.class;
@@ -27,12 +27,10 @@ public class OperadorDAO extends DAO<Operador>{
         return super.update(operador);
     }
 
-    public boolean login(HashMap<String, String> parameters) {
-        String user = parameters.get("user");
-        String password = parameters.get("password");
-        List<Operador> operadores = this.list();
-        for (Operador operador : operadores) {
-            if (operador.getNome().equals(user) && operador.getSenha().equals(password)) {
+    public boolean login(Operador operador) {
+        List<Operador> operadores = super.list();
+        for (Operador o : operadores) {
+            if (o.getNome().equals(operador.getNome()) && o.getSenha().equals(operador.getSenha())) {
                 return true;
             }
         }

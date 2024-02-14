@@ -38,7 +38,7 @@ public class Operador {
     public Operador() {
     }
 
-    public Operador(Integer operador_id, String nome, String senha, String cargo, float salario,
+    public Operador(Integer operador_id, String nome, String senha, String cargo, Float salario,
                     java.sql.Date data_contratacao) {
         this.operadorId = operador_id;
         this.nome = nome;
@@ -80,11 +80,15 @@ public class Operador {
         this.cargo = cargo;
     }
 
-    public float getSalario() {
-        return salario;
+    public Float getSalario() {
+        if (this.salario != null) {
+            return this.salario;
+        } else {
+            return null;
+        }
     }
 
-    public void setSalario(float salario) {
+    public void setSalario(Float salario) {
         this.salario = salario;
     }
 
@@ -93,7 +97,11 @@ public class Operador {
     }
 
     public void setData_contratacao(Date data_contratacao) {
-        this.data_contratacao = data_contratacao;
+        if (data_contratacao != null){
+            this.data_contratacao = data_contratacao;
+        }else {
+            this.data_contratacao = new Date(System.currentTimeMillis());
+        }
     }
 
     @Override
