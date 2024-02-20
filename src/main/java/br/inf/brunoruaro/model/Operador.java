@@ -1,11 +1,8 @@
 package br.inf.brunoruaro.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+
 import java.sql.Date;
-import jakarta.persistence.OneToMany;
 import java.util.List;
 
 
@@ -14,6 +11,7 @@ import java.util.List;
 public class Operador {
     @Column(name = "operador_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer operadorId;
     @Column
     private String nome;
@@ -23,8 +21,8 @@ public class Operador {
     private String cargo;
     @Column
     private Float salario;
-    @Column
-    private java.sql.Date data_contratacao;
+    @Column(name = "data_contratacao")
+    private Date dataContratacao;
 
     @OneToMany(mappedBy = "operador")
     private List<Movimentacao> movimentacoes;
@@ -38,14 +36,14 @@ public class Operador {
     public Operador() {
     }
 
-    public Operador(Integer operador_id, String nome, String senha, String cargo, Float salario,
-                    java.sql.Date data_contratacao) {
-        this.operadorId = operador_id;
+    public Operador(Integer operadorId, String nome, String senha, String cargo, Float salario,
+                    Date dataContratacao) {
+        this.operadorId = operadorId;
         this.nome = nome;
         this.senha = senha;
         this.cargo = cargo;
         this.salario = salario;
-        this.data_contratacao = data_contratacao;
+        this.dataContratacao = dataContratacao;
     }
 
     public Integer getOperadorId() {
@@ -92,15 +90,15 @@ public class Operador {
         this.salario = salario;
     }
 
-    public Date getData_contratacao() {
-        return data_contratacao;
+    public Date getDataContratacao() {
+        return dataContratacao;
     }
 
-    public void setData_contratacao(Date data_contratacao) {
-        if (data_contratacao != null){
-            this.data_contratacao = data_contratacao;
+    public void setDataContratacao(Date dataContratacao) {
+        if (dataContratacao != null){
+            this.dataContratacao = dataContratacao;
         }else {
-            this.data_contratacao = new Date(System.currentTimeMillis());
+            this.dataContratacao = new Date(System.currentTimeMillis());
         }
     }
 

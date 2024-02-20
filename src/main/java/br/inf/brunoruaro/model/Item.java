@@ -11,6 +11,7 @@ public class Item {
 
     @Column(name = "item_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer itemId;
 
     @ManyToOne(cascade = CascadeType.DETACH)
