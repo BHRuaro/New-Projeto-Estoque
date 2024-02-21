@@ -1,7 +1,6 @@
 package br.inf.brunoruaro.model;
 
 import jakarta.persistence.*;
-
 import java.sql.Date;
 import java.util.List;
 
@@ -11,7 +10,8 @@ public class Item {
 
     @Column(name = "item_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sequence_id_itens", sequenceName = "sequence_item")
     private Integer itemId;
 
     @ManyToOne(cascade = CascadeType.DETACH)
@@ -45,8 +45,9 @@ public class Item {
     public Item() {
     }
 
-    public Item(Integer itemId, String nome, String descricao, Float precoUnitario, Integer quantidade, Date dataValidade) {
+    public Item(Integer itemId, Fornecedor fornecedor, String nome, String descricao, Float precoUnitario, Integer quantidade, Date dataValidade) {
         this.itemId = itemId;
+        this.fornecedor = fornecedor;
         this.nome = nome;
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;
@@ -60,6 +61,14 @@ public class Item {
 
     public void setItemId(Integer itemId) {
         this.itemId = itemId;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     public String getNome() {

@@ -17,7 +17,7 @@ public class Fornecedor {
     @Column(name = "fornecedor_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer forncedorId;
+    private Integer fornecedorId;
 
     @Column
     private String nome;
@@ -31,10 +31,18 @@ public class Fornecedor {
     public Fornecedor() {
     }
 
-    public Fornecedor(Integer forncedorId, String nome, Long cnpj) {
-        this.forncedorId = forncedorId;
+    public Fornecedor(Integer fornecedorId, String nome, Long cnpj) {
+        this.fornecedorId = fornecedorId;
         this.nome = nome;
         this.cnpj = cnpj;
+    }
+
+    public Integer getFornecedorId() {
+        return fornecedorId;
+    }
+
+    public void setFornecedorId(Integer fornecedorId) {
+        this.fornecedorId = fornecedorId;
     }
 
     public String getNome() {
@@ -54,16 +62,16 @@ public class Fornecedor {
     }
 
     public Integer getForncedorId() {
-        return forncedorId;
+        return fornecedorId;
     }
 
-    public void setForncedorId(Integer forncedorId) {
-        this.forncedorId = forncedorId;
+    public void setForncedorId(Integer fornecedorId) {
+        this.fornecedorId = fornecedorId;
     }
 
     @Override
     public String toString() {
-        return "Fornecedor: " + forncedorId +
+        return "Fornecedor: " + fornecedorId +
                 ", nome: '" + nome +
                 ", cnpj: " + cnpj;
     }

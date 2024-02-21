@@ -14,7 +14,7 @@ public class FornecedorController {
     public Integer fornecedorCreate(Fornecedor fornecedor){
         fornecedorDAO.add(fornecedor);
 
-        return fornecedor.getForncedorId();
+        return fornecedor.getFornecedorId();
     }
 
     public Fornecedor fornecedorFind(Integer fornecedorId){

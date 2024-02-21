@@ -1,5 +1,7 @@
 package br.inf.brunoruaro.controller;
 
+import br.inf.brunoruaro.model.Fornecedor;
+import br.inf.brunoruaro.model.FornecedorDAO;
 import br.inf.brunoruaro.model.Item;
 import br.inf.brunoruaro.model.ItemDAO;
 import jakarta.enterprise.context.RequestScoped;
@@ -11,7 +13,12 @@ public class ItemController {
     @Inject
     ItemDAO itemDAO;
 
+    @Inject
+    FornecedorDAO fornecedorDAO;
+
     public Integer itemCreate(Item item){
+            Fornecedor fornecedor = fornecedorDAO.find(item.getFornecedor().getFornecedorId());
+            item.setFornecedor(fornecedor);
             itemDAO.add(item);
             return item.getItemId();
     }
