@@ -1,12 +1,7 @@
 package br.inf.brunoruaro.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+
 import java.util.List;
 
 
@@ -16,7 +11,8 @@ public class Fornecedor {
 
     @Column(name = "fornecedor_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sequence_id_fornecedor", sequenceName = "sequence_fornecedor")
     private Integer fornecedorId;
 
     @Column

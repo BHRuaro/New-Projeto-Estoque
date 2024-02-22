@@ -11,7 +11,8 @@ import java.util.List;
 public class Operador {
     @Column(name = "operador_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sequence_id_operador", sequenceName = "sequence_operador")
     private Integer operadorId;
     @Column
     private String nome;

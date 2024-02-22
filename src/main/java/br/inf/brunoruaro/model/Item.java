@@ -14,7 +14,7 @@ public class Item {
     @SequenceGenerator(name = "sequence_id_itens", sequenceName = "sequence_item")
     private Integer itemId;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fornecedor_id", referencedColumnName = "fornecedor_id")
     private Fornecedor fornecedor;
 

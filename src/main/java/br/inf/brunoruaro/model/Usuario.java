@@ -10,7 +10,8 @@ public class Usuario {
 
     @Column(name = "usuario_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sequence_id_usuario", sequenceName = "sequence_usuario")
     private Integer usuarioId;
 
     @Column
