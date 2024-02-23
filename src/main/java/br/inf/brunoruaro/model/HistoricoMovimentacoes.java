@@ -1,13 +1,7 @@
 package br.inf.brunoruaro.model;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.*;
 import java.sql.Date;
+
 
 @Entity
 @Table(name = "historico_movimentacoes")
@@ -15,6 +9,8 @@ public class HistoricoMovimentacoes {
 
     @Column(name = "historico_mov_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sequence_id_historico_movimentacoes", sequenceName = "sequence_historico_movimentacoes")
     private Integer historicoMovId;
 
     @ManyToOne(cascade = CascadeType.DETACH)

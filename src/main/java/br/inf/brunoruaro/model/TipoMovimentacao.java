@@ -1,10 +1,6 @@
 package br.inf.brunoruaro.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -14,6 +10,8 @@ public class TipoMovimentacao {
 
     @Column(name = "tipo_movimentacao_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sequence_id_tipo_movimentacao", sequenceName = "sequence_tipo_movimentacao")
     private Integer tipoMovimentacaoId;
 
     @Column

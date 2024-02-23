@@ -9,6 +9,8 @@ public class HistoricoCadastros {
 
     @Column(name = "historico_cad_id")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "sequence_id_historico_cadastros", sequenceName = "sequence_historico_cadastros")
     private Integer historicoCadId;
 
     @ManyToOne(cascade = CascadeType.DETACH)
