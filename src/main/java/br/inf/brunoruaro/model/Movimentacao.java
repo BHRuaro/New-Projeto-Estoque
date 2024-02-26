@@ -12,19 +12,19 @@ public class Movimentacao {
     @SequenceGenerator(name = "sequence_id_movimentacao", sequenceName = "sequence_movimentacao")
     private Integer movimentacaoId;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "tipo_movimentacao_id", referencedColumnName = "tipo_movimentacao_id")
     private TipoMovimentacao tipoMovimentacao;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
     private Operador operador;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
     private Usuario usuario;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "item_id", referencedColumnName = "item_id")
     private Item item;
 
