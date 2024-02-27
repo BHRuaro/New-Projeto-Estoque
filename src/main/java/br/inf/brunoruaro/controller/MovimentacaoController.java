@@ -2,6 +2,7 @@ package br.inf.brunoruaro.controller;
 
 import br.inf.brunoruaro.model.Movimentacao;
 import br.inf.brunoruaro.model.MovimentacaoDAO;
+import br.inf.brunoruaro.model.Operador;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
