@@ -17,7 +17,7 @@ public class HistoricoMovimentacoes {
     @JoinColumn(name = "movimentacao_id", referencedColumnName = "movimentacao_id")
     private Movimentacao movimentacao;
 
-    @Column
+    @Column(name = "data_movimentacao")
     private Date data;
 
     @ManyToOne(cascade = CascadeType.DETACH)
