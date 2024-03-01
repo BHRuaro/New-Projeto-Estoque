@@ -33,6 +33,9 @@ public class Item {
     @Column(name = "data_validade")
     private Date dataValidade;
 
+    @Column(name = "limite_movimentacao")
+    private Integer limiteMovimentacao;
+
     @OneToMany(mappedBy = "item")
     private List<Movimentacao> movimentacoes;
 
@@ -45,7 +48,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(Integer itemId, Fornecedor fornecedor, String nome, String descricao, Float precoUnitario, Integer quantidade, Date dataValidade) {
+    public Item(Integer itemId, Fornecedor fornecedor, String nome, String descricao, Float precoUnitario, Integer quantidade, Date dataValidade, Integer limiteMovimentacao) {
         this.itemId = itemId;
         this.fornecedor = fornecedor;
         this.nome = nome;
@@ -53,6 +56,7 @@ public class Item {
         this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
         this.dataValidade = dataValidade;
+        this.limiteMovimentacao = limiteMovimentacao;
     }
 
     public Integer getItemId() {
@@ -109,6 +113,14 @@ public class Item {
 
     public void setDataValidade(Date dataValidade) {
         this.dataValidade = dataValidade;
+    }
+
+    public Integer getLimiteMovimentacao() {
+        return limiteMovimentacao;
+    }
+
+    public void setLimiteMovimentacao(Integer limiteMovimentacao) {
+        this.limiteMovimentacao = limiteMovimentacao;
     }
 
     @Override
