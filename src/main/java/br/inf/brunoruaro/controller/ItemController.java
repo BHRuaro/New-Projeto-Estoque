@@ -41,7 +41,7 @@ public class ItemController {
     public Integer validaQuantidadeEstoque(Movimentacao movimentacao){
            Item itemEstoque = itemDAO.find(movimentacao.getItem().getItemId());
 
-        if(movimentacao.getTipoMovimentacao().getTipoMovimentacaoId() == 2 &&
+        if (movimentacao.getTipoMovimentacao().getTipoMovimentacaoId() == 2 &&
                    movimentacao.getQuantidade() > itemEstoque.getQuantidade()){
             return -1;
         } else if(movimentacao.getTipoMovimentacao().getTipoMovimentacaoId() == 2 &&

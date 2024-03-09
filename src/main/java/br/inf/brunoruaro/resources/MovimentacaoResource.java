@@ -18,24 +18,7 @@ public class MovimentacaoResource {
     @Path("/create")
     @Transactional
     public Response createMovimentacao(Movimentacao movimentacao){
-        try{
-            int resultado = movimentacaoController.movimentacaoCreate(movimentacao);
-            if (resultado == 0){
-                return Response.ok().entity("Erro ao criar movimentação").build();
-            } else if (resultado == -1){
-                return Response.ok().entity("Quantidade insuficiente em estoque").build();
-            } else if (resultado == -2){
-                return Response.ok().entity("Quantidade excede o limite de movimentação").build();
-            } else if (resultado == -3) {
-                return Response.ok().entity("Quantidade inválida").build();
-            } else {
-                return Response.ok().entity(resultado).build();
-            }
-        } catch (JsonParseException e){
-            return Response.ok().entity("Erro ao criar movimentação:" + e.getMessage()).build();
-        } catch (Exception e) {
-        return Response.ok().entity("Erro ao criar movimentação: " + e.getMessage()).build();
-    }
+        return Response.ok().entity( movimentacaoController.movimentacaoCreate(movimentacao)).build();
     }
 
     @PUT

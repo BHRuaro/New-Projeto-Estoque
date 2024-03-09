@@ -17,23 +17,23 @@ public class MovimentacaoController {
     @Inject
     ItemController itemController;
 
-    public Integer movimentacaoCreate(Movimentacao movimentacao){
-        int validacao = itemController.validaQuantidadeEstoque(movimentacao);
-        if (validacao == 0) {
-            movimentacaoDAO.add(movimentacao);
-            itemController.controlaQuantidadeEstoque(movimentacao);
-            historicoMovimentacaoController.adicionaHistoricoMovimentacoes(movimentacao);
-            return movimentacao.getMovimentacaoId();
-        } else if(validacao == -1){
-            return -1;
-        } else if (validacao == -2){
-            return -2;
-        } else if (validacao == -3) {
-            return -3;
-        } else {
-            return 0;
+        public String movimentacaoCreate(Movimentacao movimentacao) {
+             int validacao = itemController.validaQuantidadeEstoque(movimentacao);
+            if (validacao == 0) {
+                movimentacaoDAO.add(movimentacao);
+                itemController.controlaQuantidadeEstoque(movimentacao);
+                historicoMovimentacaoController.adicionaHistoricoMovimentacoes(movimentacao);
+                return movimentacao.getMovimentacaoId().toString();
+            } else if (validacao == -1){
+                return "Quantidade insuficiente em estoque";
+            } else if (validacao == -2){
+                return "Quantidade excede o limite de movimentação";
+            } else if (validacao == -3) {
+                throw new RuntimeException("Quantidade inválida");
+            } else {
+                return "Erro ao criar movimentação";
+            }
         }
-    }
 
 
     public Movimentacao movimentacaoFind(Integer movimentacaoId){

@@ -1,0 +1,1 @@
+alter table historico_cadastros add column fornecedor_id int references fornecedor(fornecedor_id);
