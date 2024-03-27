@@ -20,9 +20,9 @@ public class FornecedorResource {
     @POST
     @Path("/create")
     @Transactional
-    public Response createOperador(Fornecedor fornecedor) {
-        Integer operadorId = fornecedorController.fornecedorCreate(fornecedor);
-        return Response.ok().entity(operadorId).build();
+    public Response createFornecedor(Fornecedor fornecedor) {
+        Integer fornecedorId = fornecedorController.fornecedorCreate(fornecedor);
+        return Response.ok().entity(fornecedorId).build();
     }
 
     @GET

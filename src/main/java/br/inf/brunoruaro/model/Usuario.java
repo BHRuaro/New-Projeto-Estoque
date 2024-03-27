@@ -23,6 +23,10 @@ public class Usuario {
     @Column
     private Long cpf;
 
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
+    private Operador operador;
+
     @OneToMany(mappedBy = "usuario")
     private List<Movimentacao> movimentacoes;
 
@@ -35,11 +39,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer usuarioId, String nome, String email, Long cpf) {
+    public Usuario(Integer usuarioId, String nome, String email, Long cpf, Operador operador) {
         this.usuarioId = usuarioId;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
+        this.operador = operador;
     }
 
     public Integer getUsuarioId() {
@@ -72,6 +77,14 @@ public class Usuario {
 
     public void setCpf(Long cpf) {
         this.cpf = cpf;
+    }
+
+    public Operador getOperador() {
+        return operador;
+    }
+
+    public void setOperador(Operador operador) {
+        this.operador = operador;
     }
 
     @Override

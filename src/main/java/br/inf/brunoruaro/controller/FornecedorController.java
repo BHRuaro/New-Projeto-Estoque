@@ -10,9 +10,12 @@ public class FornecedorController {
 
     @Inject
     FornecedorDAO fornecedorDAO;
+    @Inject
+    HistoricoCadastrosController historicoCadastrosController;
 
     public Integer fornecedorCreate(Fornecedor fornecedor){
         fornecedorDAO.add(fornecedor);
+        historicoCadastrosController.adicionaCadastro(fornecedor);
 
         return fornecedor.getFornecedorId();
     }

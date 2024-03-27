@@ -25,6 +25,10 @@ public class HistoricoCadastros {
     @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
     private Operador operador;
 
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "fornecedor_id", referencedColumnName = "fornecedor_id")
+    private Fornecedor fornecedor;
+
     @Column(name = "data_cadastro")
     private Date data;
 
@@ -77,6 +81,14 @@ public class HistoricoCadastros {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     @Override

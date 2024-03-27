@@ -18,7 +18,7 @@ public class MovimentacaoResource {
     @Path("/create")
     @Transactional
     public Response createMovimentacao(Movimentacao movimentacao){
-        return Response.ok().entity( movimentacaoController.movimentacaoCreate(movimentacao)).build();
+        return Response.ok().entity(movimentacaoController.movimentacaoCreate(movimentacao)).build();
     }
 
     @PUT

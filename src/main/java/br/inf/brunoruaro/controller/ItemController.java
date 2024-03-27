@@ -13,11 +13,16 @@ public class ItemController {
     @Inject
     ItemDAO itemDAO;
 
+    @Inject
+    HistoricoCadastrosController historicoCadastrosController;
+
     public Integer itemCreate(Item item){
         if(item.getLimiteMovimentacao() == null){
             item.setLimiteMovimentacao(0);
         }
             itemDAO.add(item);
+            historicoCadastrosController.adicionaCadastro(item);
+
             return item.getItemId();
     }
 
@@ -54,7 +59,7 @@ public class ItemController {
         }
     }
 
-    public void controlaQuantidadeEstoque(Movimentacao movimentacao){
+    public void controlaQuantidade(Movimentacao movimentacao){
         Item itemEstoque = itemDAO.find(movimentacao.getItem().getItemId());
 
         if(movimentacao.getTipoMovimentacao().getTipoMovimentacaoId() == 2){

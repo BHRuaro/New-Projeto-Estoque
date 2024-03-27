@@ -18,21 +18,39 @@ public class MovimentacaoController {
     ItemController itemController;
 
         public String movimentacaoCreate(Movimentacao movimentacao) {
-             int validacao = itemController.validaQuantidadeEstoque(movimentacao);
+            int validacao = itemController.validaQuantidadeEstoque(movimentacao);
             if (validacao == 0) {
                 movimentacaoDAO.add(movimentacao);
-                itemController.controlaQuantidadeEstoque(movimentacao);
+                itemController.controlaQuantidade(movimentacao);
                 historicoMovimentacaoController.adicionaHistoricoMovimentacoes(movimentacao);
                 return movimentacao.getMovimentacaoId().toString();
             } else if (validacao == -1){
-                return "Quantidade insuficiente em estoque";
+                throw new RuntimeException("Quantidade insuficiente em estoque");
             } else if (validacao == -2){
-                return "Quantidade excede o limite de movimentação";
+                throw new RuntimeException("Quantidade excede o limite de movimentação");
             } else if (validacao == -3) {
                 throw new RuntimeException("Quantidade inválida");
             } else {
-                return "Erro ao criar movimentação";
+                throw new RuntimeException("Erro ao criar movimentação");
             }
+//            try {
+//                if (validacao == 0) {
+//                    movimentacaoDAO.add(movimentacao);
+//                    itemController.controlaQuantidade(movimentacao, movimentacao.getItem());
+//                    historicoMovimentacaoController.adicionaHistoricoMovimentacoes(movimentacao);
+//                    return movimentacao.getMovimentacaoId().toString();
+//                } else if (validacao == -1){
+//                    return "Quantidade insuficiente em estoque";
+//                } else if (validacao == -2){
+//                    return "Quantidade excede o limite de movimentação";
+//                } else if (validacao == -3) {
+//                    throw new RuntimeException("Quantidade inválida");
+//                } else {
+//                    return "Erro ao criar movimentação";
+//                }
+//            } catch (Exception e) {
+//                return "Erro ao criar movimentação";
+//            }
         }
 
 

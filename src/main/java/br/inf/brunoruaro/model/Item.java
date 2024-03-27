@@ -36,6 +36,10 @@ public class Item {
     @Column(name = "limite_movimentacao")
     private Integer limiteMovimentacao;
 
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
+    private Operador operador;
+
     @OneToMany(mappedBy = "item")
     private List<Movimentacao> movimentacoes;
 
@@ -48,7 +52,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(Integer itemId, Fornecedor fornecedor, String nome, String descricao, Float precoUnitario, Integer quantidade, Date dataValidade, Integer limiteMovimentacao) {
+    public Item(Integer itemId, Fornecedor fornecedor, String nome, String descricao, Float precoUnitario, Integer quantidade, Date dataValidade, Integer limiteMovimentacao, Operador operador) {
         this.itemId = itemId;
         this.fornecedor = fornecedor;
         this.nome = nome;
@@ -57,6 +61,7 @@ public class Item {
         this.quantidade = quantidade;
         this.dataValidade = dataValidade;
         this.limiteMovimentacao = limiteMovimentacao;
+        this.operador = operador;
     }
 
     public Integer getItemId() {
@@ -121,6 +126,14 @@ public class Item {
 
     public void setLimiteMovimentacao(Integer limiteMovimentacao) {
         this.limiteMovimentacao = limiteMovimentacao;
+    }
+
+    public Operador getOperador() {
+        return operador;
+    }
+
+    public void setOperador(Operador operador) {
+        this.operador = operador;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package br.inf.brunoruaro.controller;
 
-import br.inf.brunoruaro.model.HistoricoCadastros;
-import br.inf.brunoruaro.model.HistoricoCadastrosDAO;
+import br.inf.brunoruaro.model.*;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
+import java.sql.Date;
 import java.util.List;
 
 @RequestScoped
@@ -33,5 +33,51 @@ public class HistoricoCadastrosController {
 
     public HistoricoCadastros updateHistoricoCadastros(HistoricoCadastros historicoCadastros){
         return historicoCadastrosDAO.update(historicoCadastros);
+    }
+
+    public void adicionaCadastro(Object object){
+        if(object instanceof Usuario usuario){
+
+            insereUsuarioHistoricoCadastro(usuario);
+        }else if(object instanceof Item item){
+
+            insereItemHistoricoCadastro(item);
+        } else if (object instanceof Fornecedor fornecedor){
+
+            insereFornecedorHistoricoCadastro(fornecedor);
+        } else{
+            throw new RuntimeException("Erro ao adicionar cadastro");
+        }
+    }
+
+
+    public void insereUsuarioHistoricoCadastro(Usuario usuario){
+        HistoricoCadastros historicoCadastros = new HistoricoCadastros();
+
+        historicoCadastros.setUsuario(usuario);
+        historicoCadastros.setData(new Date(System.currentTimeMillis()));
+        historicoCadastros.setOperador(usuario.getOperador());
+
+        createHistoricoCadastros(historicoCadastros);
+    }
+
+    public void insereItemHistoricoCadastro(Item item){
+        HistoricoCadastros historicoCadastros = new HistoricoCadastros();
+
+        historicoCadastros.setItem(item);
+        historicoCadastros.setData(new Date(System.currentTimeMillis()));
+        historicoCadastros.setOperador(item.getOperador());
+
+        createHistoricoCadastros(historicoCadastros);
+    }
+
+    public void insereFornecedorHistoricoCadastro(Fornecedor fornecedor){
+        HistoricoCadastros historicoCadastros = new HistoricoCadastros();
+
+        historicoCadastros.setFornecedor(fornecedor);
+        historicoCadastros.setData(new Date(System.currentTimeMillis()));
+        historicoCadastros.setOperador(fornecedor.getOperador());
+
+        createHistoricoCadastros(historicoCadastros);
     }
 }

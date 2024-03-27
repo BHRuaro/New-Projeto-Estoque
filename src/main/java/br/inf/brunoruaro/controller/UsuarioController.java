@@ -11,8 +11,13 @@ public class UsuarioController {
     @Inject
     UsuarioDAO usuarioDAO;
 
+    @Inject
+    HistoricoCadastrosController historicoCadastrosController;
+
     public Integer usuarioCreate(Usuario usuario){
         usuarioDAO.add(usuario);
+
+        historicoCadastrosController.adicionaCadastro(usuario);
 
         return usuario.getUsuarioId();
     }

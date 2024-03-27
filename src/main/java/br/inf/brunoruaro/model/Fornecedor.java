@@ -22,16 +22,21 @@ public class Fornecedor {
     @Column
     private Long cnpj;
 
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
+    private Operador operador;
+
     @OneToMany(mappedBy = "fornecedor")
     private List<Item> itens;
 
     public Fornecedor() {
     }
 
-    public Fornecedor(Integer fornecedorId, String nome, Long cnpj) {
+    public Fornecedor(Integer fornecedorId, String nome, Long cnpj, Operador operador) {
         this.fornecedorId = fornecedorId;
         this.nome = nome;
         this.cnpj = cnpj;
+        this.operador = operador;
     }
 
     public Integer getFornecedorId() {
@@ -64,6 +69,14 @@ public class Fornecedor {
 
     public void setForncedorId(Integer fornecedorId) {
         this.fornecedorId = fornecedorId;
+    }
+
+    public Operador getOperador() {
+        return operador;
+    }
+
+    public void setOperador(Operador operador) {
+        this.operador = operador;
     }
 
     @Override
