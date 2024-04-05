@@ -42,7 +42,8 @@ public class HistoricoMovimentacoes {
     public HistoricoMovimentacoes() {
     }
 
-    public HistoricoMovimentacoes(Integer historicoMovId, Movimentacao movimentacao, Date data, TipoMovimentacao tipoMovimentacao, Operador operador, Usuario usuario, Item item, Integer quantidade) {
+    public HistoricoMovimentacoes(Integer historicoMovId, Movimentacao movimentacao, Date data, TipoMovimentacao tipoMovimentacao,
+                                  Operador operador, Usuario usuario, Item item, Integer quantidade) {
         this.historicoMovId = historicoMovId;
         this.movimentacao = movimentacao;
         this.data = data;

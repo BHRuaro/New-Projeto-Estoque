@@ -33,26 +33,7 @@ public class MovimentacaoController {
             } else {
                 throw new RuntimeException("Erro ao criar movimentação");
             }
-//            try {
-//                if (validacao == 0) {
-//                    movimentacaoDAO.add(movimentacao);
-//                    itemController.controlaQuantidade(movimentacao, movimentacao.getItem());
-//                    historicoMovimentacaoController.adicionaHistoricoMovimentacoes(movimentacao);
-//                    return movimentacao.getMovimentacaoId().toString();
-//                } else if (validacao == -1){
-//                    return "Quantidade insuficiente em estoque";
-//                } else if (validacao == -2){
-//                    return "Quantidade excede o limite de movimentação";
-//                } else if (validacao == -3) {
-//                    throw new RuntimeException("Quantidade inválida");
-//                } else {
-//                    return "Erro ao criar movimentação";
-//                }
-//            } catch (Exception e) {
-//                return "Erro ao criar movimentação";
-//            }
         }
-
 
     public Movimentacao movimentacaoFind(Integer movimentacaoId){
         return movimentacaoDAO.find(movimentacaoId);

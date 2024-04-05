@@ -92,6 +92,6 @@ public class Usuario {
         return "Usuario: " + usuarioId +
                 ", nome: '" + nome +
                 ", email: '" + email +
-                ", cpf: '" + cpf;
+                ", CPF: '" + cpf;
     }
 }

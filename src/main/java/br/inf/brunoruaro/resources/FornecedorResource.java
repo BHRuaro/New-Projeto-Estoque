@@ -1,15 +1,14 @@
 package br.inf.brunoruaro.resources;
 
 import br.inf.brunoruaro.controller.FornecedorController;
+import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.Fornecedor;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+
+import java.util.List;
 
 @Path("/fornecedor")
 public class FornecedorResource {
@@ -20,7 +19,7 @@ public class FornecedorResource {
     @POST
     @Path("/create")
     @Transactional
-    public Response createFornecedor(Fornecedor fornecedor) {
+    public Response createFornecedor(Fornecedor fornecedor) throws ApiException {
         Integer fornecedorId = fornecedorController.fornecedorCreate(fornecedor);
         return Response.ok().entity(fornecedorId).build();
     }
@@ -28,31 +27,30 @@ public class FornecedorResource {
     @GET
     @Path("/list")
     @Transactional
-    public Response getFornecedores() {
+    public Response getFornecedores() throws ApiException {
         return Response.ok().entity(fornecedorController.fornecedorList()).build();
     }
 
     @GET
     @Path("/find")
     @Transactional
-    public Response findFornecedor(Integer fornecedorId) {
+    public Response findFornecedor(Integer fornecedorId) throws ApiException {
         return Response.ok().entity(fornecedorController.fornecedorFind(fornecedorId)).build();
     }
 
     @DELETE
     @Path("/remove")
     @Transactional
-    public Response removeFornecedor(Integer fornecedorId) {
+    public Response removeFornecedor(Integer fornecedorId) throws ApiException {
         fornecedorController.fornecedorRemove(fornecedorId);
-        return Response.ok().build();
+        return Response.ok().entity("Removido com sucesso").build();
     }
 
     @PUT
     @Path("/update")
     @Transactional
-    public Response updateFornecedor(Fornecedor fornecedor) {
+    public Response updateFornecedor(Fornecedor fornecedor) throws ApiException{
         return Response.ok().entity(fornecedorController.fornecedorUpdate(fornecedor)).build();
     }
-    //AJUSTE: no momento seta null os campos que não forem informados
 
 }

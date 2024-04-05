@@ -26,6 +26,9 @@ public class Fornecedor {
     @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
     private Operador operador;
 
+    @OneToOne(mappedBy = "fornecedor", cascade = CascadeType.REMOVE)
+    private HistoricoCadastros historicoCadastros;
+
     @OneToMany(mappedBy = "fornecedor")
     private List<Item> itens;
 
@@ -83,6 +86,6 @@ public class Fornecedor {
     public String toString() {
         return "Fornecedor: " + fornecedorId +
                 ", nome: '" + nome +
-                ", cnpj: " + cnpj;
+                ", CNPJ: " + cnpj;
     }
 }

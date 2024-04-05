@@ -25,7 +25,7 @@ public class HistoricoCadastros {
     @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
     private Operador operador;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "fornecedor_id", referencedColumnName = "fornecedor_id")
     private Fornecedor fornecedor;
 
