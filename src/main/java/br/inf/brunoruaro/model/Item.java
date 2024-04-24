@@ -1,11 +1,18 @@
 package br.inf.brunoruaro.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.sql.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "item")
+@Setter
+@Getter
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class Item {
 
     @Column(name = "item_id")
@@ -48,93 +55,6 @@ public class Item {
 
     @OneToMany(mappedBy = "item")
     private List<HistoricoMovimentacoes> historicoMovimentacoes;
-
-    public Item() {
-    }
-
-    public Item(Integer itemId, Fornecedor fornecedor, String nome, String descricao, Float precoUnitario, Integer quantidade, Date dataValidade, Integer limiteMovimentacao, Operador operador) {
-        this.itemId = itemId;
-        this.fornecedor = fornecedor;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.precoUnitario = precoUnitario;
-        this.quantidade = quantidade;
-        this.dataValidade = dataValidade;
-        this.limiteMovimentacao = limiteMovimentacao;
-        this.operador = operador;
-    }
-
-    public Integer getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
-    }
-
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Float getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public void setPrecoUnitario(Float precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Date getDataValidade() {
-        return dataValidade;
-    }
-
-    public void setDataValidade(Date dataValidade) {
-        this.dataValidade = dataValidade;
-    }
-
-    public Integer getLimiteMovimentacao() {
-        return limiteMovimentacao;
-    }
-
-    public void setLimiteMovimentacao(Integer limiteMovimentacao) {
-        this.limiteMovimentacao = limiteMovimentacao;
-    }
-
-    public Operador getOperador() {
-        return operador;
-    }
-
-    public void setOperador(Operador operador) {
-        this.operador = operador;
-    }
 
     @Override
     public String toString() {

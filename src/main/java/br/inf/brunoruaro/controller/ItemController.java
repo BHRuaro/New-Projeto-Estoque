@@ -1,7 +1,8 @@
 package br.inf.brunoruaro.controller;
 
+import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.Item;
-import br.inf.brunoruaro.model.ItemDAO;
+import br.inf.brunoruaro.dao.ItemDAO;
 import br.inf.brunoruaro.model.Movimentacao;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -16,31 +17,106 @@ public class ItemController {
     @Inject
     HistoricoCadastrosController historicoCadastrosController;
 
-    public Integer itemCreate(Item item){
+    @Inject
+    FornecedorController fornecedorController;
+
+    public Integer itemCreate(Item item) throws ApiException {
+
+        if(!validaCadastro(item)){
+            throw new ApiException("Erro ao validar cadastro");
+        }
+
+        if(item.getQuantidade() == null){
+            item.setQuantidade(0);
+        }
+
         if(item.getLimiteMovimentacao() == null){
             item.setLimiteMovimentacao(0);
         }
+
+        try {
             itemDAO.add(item);
             historicoCadastrosController.adicionaCadastro(item);
 
             return item.getItemId();
+        }catch (Exception e) {
+            throw new ApiException("Erro ao cadastrar item");
+        }
+
     }
 
-    public Item itemFind(Integer itemId){
-        return itemDAO.find(itemId);
+    public Item itemFind(Integer itemId) throws ApiException{
+        if(itemId == null){
+            throw new ApiException("Id do item não pode ser vazio");
+        }
+
+        try {
+            return itemDAO.find(itemId);
+        }catch (Exception e) {
+            throw new ApiException("Erro ao buscar item");
+        }
     }
 
-    public void itemRemove(Integer itemId){
+    public void itemRemove(Integer itemId) throws ApiException{
+
+        if(itemId == null || itemId <= 0){
+            throw new ApiException("Informe um id de item válido");
+        } else if (itemDAO.find(itemId) == null){
+            throw new ApiException("Item não encontrado");
+        }
+
+        try {
+            Item item = itemDAO.find(itemId);
+            itemDAO.remove(item);
+        }catch (Exception e) {
+            throw new ApiException("Erro ao remover item");
+        }
+
         Item item = itemDAO.find(itemId);
         itemDAO.remove(item);
     }
 
-    public Item itemUpdate(Item item){
-        return itemDAO.update(item);
+    public Item itemUpdate(Item item) throws ApiException{
+
+        if(!validaCadastro(item)){
+            throw new ApiException("Erro ao validar cadastro");
+        }
+
+        if(item.getQuantidade() == null){
+            item.setQuantidade(0);
+        }
+
+        if(item.getLimiteMovimentacao() == null){
+            item.setLimiteMovimentacao(0);
+        }
+
+        try {
+            return itemDAO.update(item);
+        }catch (Exception e) {
+            throw new ApiException("Erro ao atualizar item");
+        }
     }
 
-    public List<Item> itemList(){
-        return itemDAO.list();
+    public List<Item> itemList() throws ApiException{
+        try {
+            return itemDAO.list();
+        }catch (Exception e) {
+            throw new ApiException("Erro ao listar itens");
+        }
+    }
+
+    public boolean validaCadastro(Item item) throws ApiException{
+        if(item.getNome() == null || item.getNome().isEmpty()){
+            throw new ApiException("Nome do item não pode ser vazio");
+        }
+
+        if(item.getFornecedor() == null){
+            throw new ApiException("Fornecedor do item não pode ser vazio");
+        }else if(fornecedorController.fornecedorFind(item.getFornecedor().getFornecedorId()) == null){
+            throw new ApiException("Fornecedor não encontrado");
+        }
+
+        return true;
     }
 
     public Integer validaQuantidadeEstoque(Movimentacao movimentacao){

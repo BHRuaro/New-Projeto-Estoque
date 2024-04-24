@@ -1,7 +1,7 @@
 package br.inf.brunoruaro.controller;
 
 import br.inf.brunoruaro.model.Operador;
-import br.inf.brunoruaro.model.OperadorDAO;
+import br.inf.brunoruaro.dao.OperadorDAO;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 

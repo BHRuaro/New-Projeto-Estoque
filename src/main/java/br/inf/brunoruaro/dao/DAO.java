@@ -1,4 +1,4 @@
-package br.inf.brunoruaro.model;
+package br.inf.brunoruaro.dao;
 
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;

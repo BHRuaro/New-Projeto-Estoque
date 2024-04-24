@@ -1,10 +1,17 @@
 package br.inf.brunoruaro.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.sql.Date;
 
 @Entity
 @Table(name = "historico_cadastros")
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class HistoricoCadastros {
 
     @Column(name = "historico_cad_id")
@@ -31,65 +38,6 @@ public class HistoricoCadastros {
 
     @Column(name = "data_cadastro")
     private Date data;
-
-    public HistoricoCadastros() {
-    }
-
-    public HistoricoCadastros(Integer historicoCadId, Usuario usuario, Item item, Operador operador, Date data) {
-        this.historicoCadId = historicoCadId;
-        this.usuario = usuario;
-        this.item = item;
-        this.operador = operador;
-        this.data = data;
-    }
-
-    public Integer getHistoricoCadId() {
-        return historicoCadId;
-    }
-
-    public void setHistoricoCadId(Integer historicoCadId) {
-        this.historicoCadId = historicoCadId;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public Operador getOperador() {
-        return operador;
-    }
-
-    public void setOperador(Operador operador) {
-        this.operador = operador;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
 
     @Override
     public String toString() {

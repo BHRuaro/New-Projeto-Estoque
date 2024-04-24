@@ -1,5 +1,6 @@
 package br.inf.brunoruaro.controller;
 
+import br.inf.brunoruaro.dao.HistoricoCadastrosDAO;
 import br.inf.brunoruaro.model.*;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;

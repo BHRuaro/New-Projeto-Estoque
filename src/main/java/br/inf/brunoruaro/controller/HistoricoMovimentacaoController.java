@@ -1,7 +1,7 @@
 package br.inf.brunoruaro.controller;
 
 import br.inf.brunoruaro.model.HistoricoMovimentacoes;
-import br.inf.brunoruaro.model.HistoricoMovimentacoesDAO;
+import br.inf.brunoruaro.dao.HistoricoMovimentacoesDAO;
 import br.inf.brunoruaro.model.Movimentacao;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;

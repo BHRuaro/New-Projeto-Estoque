@@ -1,5 +1,6 @@
-package br.inf.brunoruaro.model;
+package br.inf.brunoruaro.dao;
 
+import br.inf.brunoruaro.model.Operador;
 import jakarta.enterprise.context.RequestScoped;
 import java.util.List;
 

@@ -1,9 +1,15 @@
 package br.inf.brunoruaro.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Table(name = "movimentacoes")
 @Entity
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movimentacao {
 
     @Column(name = "movimentacao_id")
@@ -30,66 +36,6 @@ public class Movimentacao {
 
     @Column
     private Integer quantidade;
-
-    public Movimentacao() {
-    }
-
-    public Movimentacao(Integer movimentacaoId, TipoMovimentacao tipoMovimentacao, Operador operador, Usuario usuario, Item item, Integer quantidade) {
-        this.movimentacaoId = movimentacaoId;
-        this.tipoMovimentacao = tipoMovimentacao;
-        this.operador = operador;
-        this.usuario = usuario;
-        this.item = item;
-        this.quantidade = quantidade;
-    }
-
-    public Integer getMovimentacaoId() {
-        return movimentacaoId;
-    }
-
-    public void setMovimentacaoId(Integer movimentacaoId) {
-        this.movimentacaoId = movimentacaoId;
-    }
-
-    public TipoMovimentacao getTipoMovimentacao() {
-        return tipoMovimentacao;
-    }
-
-    public void setTipoMovimentacao(TipoMovimentacao tipoMovimentacao) {
-        this.tipoMovimentacao = tipoMovimentacao;
-    }
-
-    public Operador getOperador() {
-        return operador;
-    }
-
-    public void setOperador(Operador operador) {
-        this.operador = operador;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
 
     @Override
     public String toString() {

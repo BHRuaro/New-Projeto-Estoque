@@ -1,11 +1,17 @@
 package br.inf.brunoruaro.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Table(name = "usuario")
 @Entity
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
     @Column(name = "usuario_id")
@@ -35,57 +41,6 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<HistoricoCadastros> historicoCadastros;
-
-    public Usuario() {
-    }
-
-    public Usuario(Integer usuarioId, String nome, String email, Long cpf, Operador operador) {
-        this.usuarioId = usuarioId;
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
-        this.operador = operador;
-    }
-
-    public Integer getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(Long cpf) {
-        this.cpf = cpf;
-    }
-
-    public Operador getOperador() {
-        return operador;
-    }
-
-    public void setOperador(Operador operador) {
-        this.operador = operador;
-    }
 
     @Override
     public String toString() {

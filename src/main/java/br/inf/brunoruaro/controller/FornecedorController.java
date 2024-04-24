@@ -2,7 +2,7 @@ package br.inf.brunoruaro.controller;
 
 import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.Fornecedor;
-import br.inf.brunoruaro.model.FornecedorDAO;
+import br.inf.brunoruaro.dao.FornecedorDAO;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
@@ -18,13 +18,9 @@ public class FornecedorController {
 
     public Integer fornecedorCreate(Fornecedor fornecedor) throws ApiException {
 
-        if(fornecedor.getNome() == null || fornecedor.getNome().isEmpty()){
-            throw new ApiException("Nome do fornecedor não pode ser vazio");
-        }
-
-        if (!validarCnpj(fornecedor.getCnpj())) {
-            throw new ApiException("CNPJ do fornecedor inválido");
-        }
+        if(!validaCadastro(fornecedor)){
+            throw new ApiException("Erro ao validar cadastro");
+        } 
 
         try {
             fornecedorDAO.add(fornecedor);
@@ -68,9 +64,10 @@ public class FornecedorController {
 
     public Fornecedor fornecedorUpdate(Fornecedor fornecedor) throws ApiException{
 
-        if(fornecedor.getNome() == null || fornecedor.getNome().isEmpty()){
-            throw new ApiException("Nome do fornecedor não pode ser vazio");
+        if(!validaCadastro(fornecedor)){
+            throw new ApiException("Erro ao validar cadastro");
         }
+
         try {
             return fornecedorDAO.update(fornecedor);
         } catch (Exception e) {
@@ -78,12 +75,7 @@ public class FornecedorController {
         }
     }
 
-    public List fornecedorList() throws ApiException{
-
-        if(fornecedorDAO.list().isEmpty()){
-            throw new ApiException("Nenhum fornecedor cadastrado");
-        }
-
+    public List<Fornecedor> fornecedorList() throws ApiException{
         try {
             return fornecedorDAO.list();
         } catch (Exception e) {
@@ -91,7 +83,19 @@ public class FornecedorController {
         }
     }
 
-    public boolean validarCnpj(Long cnpj) {
+    private static boolean validaCadastro(Fornecedor fornecedor) throws ApiException {
+        if (fornecedor.getNome() == null || fornecedor.getNome().isEmpty()) {
+            throw new ApiException("Nome do fornecedor não pode ser vazio");
+        }
+
+        if (!validarCnpj(fornecedor.getCnpj())) {
+            throw new ApiException("CNPJ do fornecedor inválido");
+        }
+
+        return true;
+    }
+
+    public static boolean validarCnpj(Long cnpj) {
         if (cnpj == null) {
             return false;
         }
