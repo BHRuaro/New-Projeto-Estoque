@@ -2,9 +2,10 @@ package br.inf.brunoruaro.dao;
 
 import br.inf.brunoruaro.model.TipoMovimentacao;
 import jakarta.enterprise.context.RequestScoped;
+import org.glassfish.jaxb.core.v2.model.core.ID;
 
 @RequestScoped
-public class TipoMovimentacaoDAO extends DAO<TipoMovimentacao>{
+public class TipoMovimentacaoDAO extends DAO<TipoMovimentacao, ID>{
 
         @Override
         public Class<TipoMovimentacao> getEntityClass() {

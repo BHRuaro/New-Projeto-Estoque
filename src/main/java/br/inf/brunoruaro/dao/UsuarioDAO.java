@@ -2,9 +2,10 @@ package br.inf.brunoruaro.dao;
 
 import br.inf.brunoruaro.model.Usuario;
 import jakarta.enterprise.context.RequestScoped;
+import org.glassfish.jaxb.core.v2.model.core.ID;
 
 @RequestScoped
-public class UsuarioDAO extends DAO<Usuario>{
+public class UsuarioDAO extends DAO<Usuario, ID>{
 
     @Override
     public Class<Usuario> getEntityClass() {

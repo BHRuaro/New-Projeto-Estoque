@@ -2,9 +2,10 @@ package br.inf.brunoruaro.dao;
 
 import br.inf.brunoruaro.model.Movimentacao;
 import jakarta.enterprise.context.RequestScoped;
+import org.glassfish.jaxb.core.v2.model.core.ID;
 
 @RequestScoped
-public class MovimentacaoDAO extends DAO<Movimentacao>{
+public class MovimentacaoDAO extends DAO<Movimentacao, ID>{
 
     @Override
     public Class<Movimentacao> getEntityClass() {

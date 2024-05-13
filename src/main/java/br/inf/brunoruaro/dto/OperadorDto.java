@@ -7,11 +7,8 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class UsuarioDto {
+public class OperadorDto {
 
-    private Integer usuarioId;
+    private Integer operadorId;
     private String nome;
-    private String email;
-    private Long cpf;
-    private OperadorDto operadorId;
 }
