@@ -1,4 +1,6 @@
 package br.inf.brunoruaro.resources;
 
-public class CrudResource {
+import java.io.Serializable;
+
+public class CrudResource <T, D, ID extends Serializable> {
 }

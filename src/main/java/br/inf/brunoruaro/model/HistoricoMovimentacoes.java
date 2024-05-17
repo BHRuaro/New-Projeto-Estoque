@@ -45,18 +45,4 @@ public class HistoricoMovimentacoes {
 
     @Column(name = "quantidade_movimentada")
     private Integer quantidade;
-
-    @Override
-    public String toString() {
-        return "HistoricoMovimentacoes{" +
-                "historicoMovId=" + historicoMovId +
-                ", movimentacao=" + movimentacao +
-                ", data=" + data +
-                ", tipoMovimentacao=" + tipoMovimentacao +
-                ", operador=" + operador +
-                ", usuario=" + usuario +
-                ", item=" + item +
-                ", quantidade=" + quantidade +
-                '}';
-    }
 }

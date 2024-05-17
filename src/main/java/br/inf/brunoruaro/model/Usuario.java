@@ -1,5 +1,6 @@
 package br.inf.brunoruaro.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,19 +35,14 @@ public class Usuario {
     private Operador operador;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Movimentacao> movimentacoes;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<HistoricoMovimentacoes> historicoMovimentacoes;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<HistoricoCadastros> historicoCadastros;
-
-    @Override
-    public String toString() {
-        return "Usuario: " + usuarioId +
-                ", nome: '" + nome +
-                ", email: '" + email +
-                ", CPF: '" + cpf;
-    }
 }

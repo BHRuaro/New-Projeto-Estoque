@@ -1,6 +1,5 @@
 package br.inf.brunoruaro.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,7 +30,6 @@ public class HistoricoCadastros {
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "operador_id", referencedColumnName = "operador_id")
-    @JsonIgnore
     private Operador operador;
 
     @OneToOne(cascade = CascadeType.DETACH)
@@ -40,15 +38,4 @@ public class HistoricoCadastros {
 
     @Column(name = "data_cadastro")
     private Date data;
-
-    @Override
-    public String toString() {
-        return "HistoricoCadastros{" +
-                "historicoCadId=" + historicoCadId +
-                ", usuario=" + usuario +
-                ", item=" + item +
-                ", operador=" + operador +
-                ", data=" + data +
-                '}';
-    }
 }

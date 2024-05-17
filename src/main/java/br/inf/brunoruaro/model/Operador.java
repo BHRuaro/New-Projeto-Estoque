@@ -1,5 +1,6 @@
 package br.inf.brunoruaro.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,17 +32,15 @@ public class Operador {
     @Column(name = "data_contratacao")
     private Date dataContratacao;
 
-    @OneToMany(mappedBy = "operador")
+    @OneToMany(mappedBy = "operador", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Movimentacao> movimentacoes;
 
-    @OneToMany(mappedBy = "operador")
+    @OneToMany(mappedBy = "operador", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<HistoricoCadastros> historicoCadastros;
 
-    @OneToMany(mappedBy = "operador")
+    @OneToMany(mappedBy = "operador", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<HistoricoMovimentacoes> historicoMovimentacoes;
-
-    @Override
-    public String toString() {
-        return "Operador" + operadorId + " - " + nome;
-    }
 }

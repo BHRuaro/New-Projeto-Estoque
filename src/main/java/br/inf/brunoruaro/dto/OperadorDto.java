@@ -11,4 +11,5 @@ public class OperadorDto {
 
     private Integer operadorId;
     private String nome;
+    private String senha;
 }

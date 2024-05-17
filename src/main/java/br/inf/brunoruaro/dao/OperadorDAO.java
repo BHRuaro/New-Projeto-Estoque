@@ -13,22 +13,6 @@ public class OperadorDAO extends DAO<Operador, ID> {
         return Operador.class;
     }
 
-    public Operador find(Integer id) {
-        return super.find(id);
-    }
-
-    public void add(Operador operador) {
-        super.add(operador);
-    }
-
-    public void remove(Operador operador) {
-        super.remove(operador);
-    }
-
-    public Operador update(Operador operador) {
-        return super.update(operador);
-    }
-
     public boolean login(Operador operador) {
         List<Operador> operadores = super.list();
         for (Operador o : operadores) {

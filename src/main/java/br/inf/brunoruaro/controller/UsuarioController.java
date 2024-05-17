@@ -16,7 +16,7 @@ public class UsuarioController {
     HistoricoCadastrosController historicoCadastrosController;
 
     public Integer usuarioCreate(Usuario usuario) throws ApiException {
-        if(!validaCadastro(usuario)){
+        if(validaCadastro(usuario)){
             throw new ApiException("Erro ao validar cadastro");
         }
 
@@ -62,7 +62,7 @@ public class UsuarioController {
 
     public Usuario usuarioUpdate(Usuario usuario) throws ApiException{
 
-        if(!validaCadastro(usuario)){
+        if(validaCadastro(usuario)){
             throw new ApiException("Erro ao validar cadastro");
         }
 
@@ -94,7 +94,11 @@ public class UsuarioController {
             throw new ApiException("Email do usuário inválido");
         }
 
-        return true;
+        if(usuario.getOperador() == null){
+            throw new ApiException("Informe um id de operador válido");
+        }
+
+        return false;
     }
 
     public static boolean validarCPF(Long cpf) {

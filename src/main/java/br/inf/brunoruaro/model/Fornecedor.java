@@ -1,5 +1,6 @@
 package br.inf.brunoruaro.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,15 +34,9 @@ public class Fornecedor {
     private Operador operador;
 
     @OneToOne(mappedBy = "fornecedor", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private HistoricoCadastros historicoCadastros;
 
     @OneToMany(mappedBy = "fornecedor")
     private List<Item> itens;
-
-    @Override
-    public String toString() {
-        return "Fornecedor: " + fornecedorId +
-                ", nome: '" + nome +
-                ", CNPJ: " + cnpj;
-    }
 }

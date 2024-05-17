@@ -28,10 +28,4 @@ public class TipoMovimentacao {
 
     @OneToMany(mappedBy = "tipoMovimentacao")
     private List<HistoricoMovimentacoes> historicoMovimentacoes;
-
-    @Override
-    public String toString() {
-        return "TipoMovimentacao: " + tipoMovimentacaoId +
-                " - " + descricao;
-    }
 }
