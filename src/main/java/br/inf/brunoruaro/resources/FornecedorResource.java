@@ -8,8 +8,6 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
-import java.util.List;
-
 @Path("/fornecedor")
 public class FornecedorResource {
 
@@ -51,6 +49,13 @@ public class FornecedorResource {
     @Transactional
     public Response updateFornecedor(Fornecedor fornecedor) throws ApiException{
         return Response.ok().entity(fornecedorController.fornecedorUpdate(fornecedor)).build();
+    }
+
+    @GET
+    @Path("/getByName")
+    @Transactional
+    public Response getFornecedorByName(String name) throws ApiException {
+        return Response.ok().entity(fornecedorController.fornecedorFindByName(name)).build();
     }
 
 }

@@ -37,6 +37,6 @@ public class Fornecedor {
     @JsonIgnore
     private HistoricoCadastros historicoCadastros;
 
-    @OneToMany(mappedBy = "fornecedor")
+    @OneToMany(mappedBy = "fornecedor", fetch = FetchType.EAGER)
     private List<Item> itens;
 }

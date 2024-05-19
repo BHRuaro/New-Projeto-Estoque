@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.*;
 
 @QuarkusTest
-public class UsuarioControllerTest {
+public class UsuarioResourceTest {
 
     @Test
     @DisplayName("Post a new User when the User is valid receive a 200 Ok")

@@ -2,12 +2,10 @@ package br.inf.brunoruaro.dao;
 
 import br.inf.brunoruaro.model.Operador;
 import jakarta.enterprise.context.RequestScoped;
-import org.glassfish.jaxb.core.v2.model.core.ID;
-
 import java.util.List;
 
 @RequestScoped
-public class OperadorDAO extends DAO<Operador, ID> {
+public class OperadorDAO extends DAO<Operador> {
     @Override
     public Class<Operador> getEntityClass() {
         return Operador.class;

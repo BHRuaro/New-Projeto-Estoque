@@ -1,5 +1,6 @@
 package br.inf.brunoruaro.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,8 +25,10 @@ public class TipoMovimentacao {
     private String descricao;
 
     @OneToMany(mappedBy = "tipoMovimentacao")
+    @JsonIgnore
     private List<Movimentacao> movimentacoes;
 
     @OneToMany(mappedBy = "tipoMovimentacao")
+    @JsonIgnore
     private List<HistoricoMovimentacoes> historicoMovimentacoes;
 }

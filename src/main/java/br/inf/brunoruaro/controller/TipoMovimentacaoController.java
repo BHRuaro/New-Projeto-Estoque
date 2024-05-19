@@ -1,37 +1,24 @@
 package br.inf.brunoruaro.controller;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import br.inf.brunoruaro.dao.TipoMovimentacaoDAO;
 import br.inf.brunoruaro.model.TipoMovimentacao;
 
 @RequestScoped
-public class TipoMovimentacaoController {
+public class TipoMovimentacaoController extends CrudController<TipoMovimentacao>{
 
     @Inject
     TipoMovimentacaoDAO tipoMovimentacaoDAO;
 
-    public Integer tipoMovimentacaoCreate(TipoMovimentacao tipoMovimentacao){
-        tipoMovimentacaoDAO.add(tipoMovimentacao);
-
-        return tipoMovimentacao.getTipoMovimentacaoId();
+    @PostConstruct
+    public void init() {
+        this.dao = tipoMovimentacaoDAO;
     }
 
-    public TipoMovimentacao tipoMovimentacaoFind(Integer tipoMovimentacaoId){
-        return tipoMovimentacaoDAO.find(tipoMovimentacaoId);
+    @Override
+    protected Integer getId(TipoMovimentacao entity) {
+        return entity.getTipoMovimentacaoId();
     }
-
-    public void tipoMovimentacaoRemove(Integer tipoMovimentacaoId){
-        TipoMovimentacao tipoMovimentacao = tipoMovimentacaoDAO.find(tipoMovimentacaoId);
-        tipoMovimentacaoDAO.remove(tipoMovimentacao);
-    }
-
-    public TipoMovimentacao tipoMovimentacaoUpdate(TipoMovimentacao tipoMovimentacao){
-        return tipoMovimentacaoDAO.update(tipoMovimentacao);
-    }
-
-    public Object tipoMovimentacaoList(){
-        return tipoMovimentacaoDAO.list();
-    }
-
 }

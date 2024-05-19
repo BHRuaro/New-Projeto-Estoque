@@ -83,6 +83,17 @@ public class FornecedorController {
         }
     }
 
+    public Fornecedor fornecedorFindByName(String name) throws ApiException {
+        if (name == null || name.isEmpty()) {
+            throw new ApiException("Nome não pode ser vazio");
+        }
+        try {
+            return fornecedorDAO.getByName(name);
+        } catch (Exception e) {
+            throw new ApiException("Erro ao buscar fornecedor");
+        }
+    }
+
     private static boolean validaCadastro(Fornecedor fornecedor) throws ApiException {
         if (fornecedor.getNome() == null || fornecedor.getNome().isEmpty()) {
             throw new ApiException("Nome do fornecedor não pode ser vazio");

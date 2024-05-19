@@ -3,11 +3,10 @@ package br.inf.brunoruaro.dao;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
-
-import java.io.Serializable;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
 
-public abstract class DAO<T, ID extends Serializable> {
+public abstract class DAO<T> {
 
     @Inject
     EntityManager em;
@@ -33,6 +32,17 @@ public abstract class DAO<T, ID extends Serializable> {
 
     public T update(T t) throws PersistenceException{
         return em.merge(t);
+    }
+
+    public T getByName(String name) {
+
+        String queryString = "SELECT a FROM " + getEntityClass().getName() + " a WHERE a.nome = :name";
+
+        TypedQuery<T> query = em.createQuery(queryString, getEntityClass());
+
+        query.setParameter("name", name);
+
+        return query.getSingleResult();
     }
 }
 
