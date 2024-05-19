@@ -13,11 +13,11 @@ public class TipoMovimentacaoResource extends CrudResource<TipoMovimentacao, Tip
     @Inject
     TipoMovimentacaoController tipoMovimentacaoController;
 
-    private final ModelMapper modelMapper;
+    @Inject
+    ModelMapper modelMapper;
 
-    public TipoMovimentacaoResource(Class<TipoMovimentacao> typeClass, Class<TipoMovimentacaoDTO> typeDtoClass, ModelMapper modelMapper) {
-        super(typeClass, typeDtoClass);
-        this.modelMapper = modelMapper;
+    public TipoMovimentacaoResource() {
+        super(TipoMovimentacao.class, TipoMovimentacaoDTO.class);
     }
 
     @Override
