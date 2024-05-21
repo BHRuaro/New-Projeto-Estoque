@@ -2,16 +2,15 @@ package br.inf.brunoruaro.dto;
 
 import lombok.*;
 
-@Builder
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioDto {
+public class FornecedorDto {
 
-    private Integer usuarioId;
+    private Integer fornecedorId;
     private String nome;
-    private String email;
-    private Long cpf;
+    private Long cnpj;
     private Integer operadorId;
 }

@@ -3,24 +3,34 @@ package br.inf.brunoruaro.controller;
 import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.Fornecedor;
 import br.inf.brunoruaro.dao.FornecedorDAO;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
-import java.util.List;
-
 @RequestScoped
-public class FornecedorController {
+public class FornecedorController extends CrudController<Fornecedor>{
 
     @Inject
     FornecedorDAO fornecedorDAO;
     @Inject
     HistoricoCadastrosController historicoCadastrosController;
 
-    public Integer fornecedorCreate(Fornecedor fornecedor) throws ApiException {
+    @PostConstruct
+    public void init() {
+        this.dao = fornecedorDAO;
+    }
+
+    @Override
+    public Integer getId(Fornecedor entity) {
+        return entity.getFornecedorId();
+    }
+
+    @Override
+    public Integer create(Fornecedor fornecedor) throws ApiException {
 
         if(!validaCadastro(fornecedor)){
             throw new ApiException("Erro ao validar cadastro");
-        } 
+        }
 
         try {
             fornecedorDAO.add(fornecedor);
@@ -31,38 +41,8 @@ public class FornecedorController {
         return fornecedor.getFornecedorId();
     }
 
-    public Fornecedor fornecedorFind (Integer fornecedorId) throws ApiException {
-
-        if (fornecedorId == null || fornecedorId <= 0){
-            throw new ApiException("Informe um id de fornecedor válido");
-        } else if (fornecedorDAO.find(fornecedorId) == null) {
-            throw new ApiException("Fornecedor não encontrado");
-        }
-
-        try {
-            return fornecedorDAO.find(fornecedorId);
-        } catch (Exception e) {
-            throw new ApiException("Erro ao buscar fornecedor");
-        }
-    }
-
-    public void fornecedorRemove(Integer fornecedorId) throws ApiException{
-
-        if (fornecedorId == null || fornecedorId <= 0){
-            throw new ApiException("Informe um id de fornecedor válido");
-        } else if (fornecedorDAO.find(fornecedorId) == null) {
-            throw new ApiException("Fornecedor não encontrado");
-        }
-        try{
-            Fornecedor fornecedor = fornecedorDAO.find(fornecedorId);
-            fornecedorDAO.remove(fornecedor);
-        }catch (Exception e){
-            throw new ApiException("Erro ao remover fornecedor");
-        }
-
-    }
-
-    public Fornecedor fornecedorUpdate(Fornecedor fornecedor) throws ApiException{
+    @Override
+    public Fornecedor update(Fornecedor fornecedor) throws ApiException {
 
         if(!validaCadastro(fornecedor)){
             throw new ApiException("Erro ao validar cadastro");
@@ -72,25 +52,6 @@ public class FornecedorController {
             return fornecedorDAO.update(fornecedor);
         } catch (Exception e) {
             throw new ApiException("Erro ao atualizar fornecedor");
-        }
-    }
-
-    public List<Fornecedor> fornecedorList() throws ApiException{
-        try {
-            return fornecedorDAO.list();
-        } catch (Exception e) {
-            throw new ApiException("Erro ao listar fornecedores");
-        }
-    }
-
-    public Fornecedor fornecedorFindByName(String name) throws ApiException {
-        if (name == null || name.isEmpty()) {
-            throw new ApiException("Nome não pode ser vazio");
-        }
-        try {
-            return fornecedorDAO.getByName(name);
-        } catch (Exception e) {
-            throw new ApiException("Erro ao buscar fornecedor");
         }
     }
 

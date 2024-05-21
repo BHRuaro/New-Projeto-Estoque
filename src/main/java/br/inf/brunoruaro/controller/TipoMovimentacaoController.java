@@ -18,7 +18,7 @@ public class TipoMovimentacaoController extends CrudController<TipoMovimentacao>
     }
 
     @Override
-    protected Integer getId(TipoMovimentacao entity) {
+    public Integer getId(TipoMovimentacao entity) {
         return entity.getTipoMovimentacaoId();
     }
 }

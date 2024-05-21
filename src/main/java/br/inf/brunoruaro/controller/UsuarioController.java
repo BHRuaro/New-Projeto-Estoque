@@ -1,13 +1,14 @@
 package br.inf.brunoruaro.controller;
 
 import br.inf.brunoruaro.error.ApiException;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import br.inf.brunoruaro.dao.UsuarioDAO;
 import br.inf.brunoruaro.model.Usuario;
 
 @RequestScoped
-public class UsuarioController {
+public class UsuarioController extends CrudController<Usuario>{
 
     @Inject
     UsuarioDAO usuarioDAO;
@@ -15,11 +16,21 @@ public class UsuarioController {
     @Inject
     HistoricoCadastrosController historicoCadastrosController;
 
-    public Integer usuarioCreate(Usuario usuario) throws ApiException {
+    @PostConstruct
+    public void init() {
+        this.dao = usuarioDAO;
+    }
+
+    @Override
+    public Integer getId(Usuario entity) {
+        return entity.getUsuarioId();
+    }
+
+    @Override
+    public Integer create(Usuario usuario) throws ApiException {
         if(validaCadastro(usuario)){
             throw new ApiException("Erro ao validar cadastro");
         }
-
         try {
             usuarioDAO.add(usuario);
             historicoCadastrosController.adicionaCadastro(usuario);
@@ -30,37 +41,8 @@ public class UsuarioController {
         return usuario.getUsuarioId();
     }
 
-    public Usuario usuarioFind(Integer usuarioId) throws ApiException{
-
-        if(usuarioId == null || usuarioId <= 0){
-            throw new ApiException("Informe um id de usuário válido");
-        } else if(usuarioDAO.find(usuarioId) == null){
-            throw new ApiException("Usuário não encontrado");
-        }
-        try {
-            return usuarioDAO.find(usuarioId);
-        } catch (Exception e){
-            throw new ApiException("Erro ao buscar usuário");
-        }
-    }
-
-    public void usuarioRemove(Integer usuarioId) throws ApiException{
-
-        if(usuarioId == null || usuarioId <= 0){
-            throw new ApiException("Informe um id de usuário válido");
-        } else if(usuarioDAO.find(usuarioId) == null){
-            throw new ApiException("Usuário não encontrado");
-        }
-
-        try {
-            Usuario usuario = usuarioDAO.find(usuarioId);
-            usuarioDAO.remove(usuario);
-        } catch (Exception e){
-            throw new ApiException("Erro ao remover usuário");
-        }
-    }
-
-    public Usuario usuarioUpdate(Usuario usuario) throws ApiException{
+    @Override
+    public Usuario update(Usuario usuario) throws ApiException {
 
         if(validaCadastro(usuario)){
             throw new ApiException("Erro ao validar cadastro");
@@ -70,14 +52,6 @@ public class UsuarioController {
             return usuarioDAO.update(usuario);
         } catch (Exception e){
             throw new ApiException("Erro ao atualizar usuário");
-        }
-    }
-
-    public Object usuarioList() throws ApiException{
-        try {
-            return usuarioDAO.list();
-        } catch (Exception e){
-            throw new ApiException("Erro ao listar usuários");
         }
     }
 

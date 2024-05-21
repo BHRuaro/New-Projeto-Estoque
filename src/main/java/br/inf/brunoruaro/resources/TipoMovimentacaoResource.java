@@ -1,14 +1,14 @@
 package br.inf.brunoruaro.resources;
 
 import br.inf.brunoruaro.controller.TipoMovimentacaoController;
-import br.inf.brunoruaro.dto.TipoMovimentacaoDTO;
+import br.inf.brunoruaro.dto.TipoMovimentacaoDto;
 import br.inf.brunoruaro.model.TipoMovimentacao;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.modelmapper.ModelMapper;
 
 @Path("/tipoMovimentacao")
-public class TipoMovimentacaoResource extends CrudResource<TipoMovimentacao, TipoMovimentacaoDTO>{
+public class TipoMovimentacaoResource extends CrudResource<TipoMovimentacao, TipoMovimentacaoDto>{
 
     @Inject
     TipoMovimentacaoController tipoMovimentacaoController;
@@ -17,7 +17,7 @@ public class TipoMovimentacaoResource extends CrudResource<TipoMovimentacao, Tip
     ModelMapper modelMapper;
 
     public TipoMovimentacaoResource() {
-        super(TipoMovimentacao.class, TipoMovimentacaoDTO.class);
+        super(TipoMovimentacao.class, TipoMovimentacaoDto.class);
     }
 
     @Override

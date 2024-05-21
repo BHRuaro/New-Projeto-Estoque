@@ -20,7 +20,7 @@ public class HistoricoCadastros {
     @SequenceGenerator(name = "sequence_id_historico_cadastros", sequenceName = "sequence_historico_cadastros")
     private Integer historicoCadId;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
     private Usuario usuario;
 

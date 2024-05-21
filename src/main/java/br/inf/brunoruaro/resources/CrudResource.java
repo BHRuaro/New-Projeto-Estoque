@@ -57,7 +57,7 @@ public abstract class CrudResource <T, D> {
     public Response update(D dto) throws ApiException {
         T entity = toEntity(dto);
         crudController.update(entity);
-        return Response.ok().build();
+        return Response.ok().entity(entity).build();
     }
 
     @DELETE
@@ -73,6 +73,15 @@ public abstract class CrudResource <T, D> {
     @Transactional
     public Response list() throws ApiException {
         List<T> entities = crudController.list();
+        List<D> dtos = entities.stream().map(this::toDto).collect(Collectors.toList());
+        return Response.ok().entity(dtos).build();
+    }
+
+    @GET
+    @Path("/getByName")
+    @Transactional
+    public Response getByName(String name) throws ApiException {
+        List<T> entities = crudController.getByName(name);
         List<D> dtos = entities.stream().map(this::toDto).collect(Collectors.toList());
         return Response.ok().entity(dtos).build();
     }

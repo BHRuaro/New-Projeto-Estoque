@@ -34,15 +34,15 @@ public abstract class DAO<T> {
         return em.merge(t);
     }
 
-    public T getByName(String name) {
+    public List<T> getByName(String name) {
 
-        String queryString = "SELECT a FROM " + getEntityClass().getName() + " a WHERE a.nome = :name";
+        String queryString = "SELECT a FROM " + getEntityClass().getName() + " a WHERE LOWER(a.nome) LIKE LOWER(:name)";
 
         TypedQuery<T> query = em.createQuery(queryString, getEntityClass());
 
-        query.setParameter("name", name);
+        query.setParameter("name", "%" + name + "%");
 
-        return query.getSingleResult();
+        return query.getResultList();
     }
 }
 

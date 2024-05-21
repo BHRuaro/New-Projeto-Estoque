@@ -10,4 +10,6 @@ public interface ICrudController<T> {
     T update(T entity) throws ApiException;
     void delete(Integer id) throws ApiException;
     List<T> list() throws ApiException;
+    Integer getId(T entity);
+    List<T> getByName(String name) throws ApiException;
 }
