@@ -23,19 +23,24 @@ public class FornecedorResource extends CrudResource<Fornecedor, FornecedorDto>{
         super(Fornecedor.class, FornecedorDto.class);
     }
 
+    @Override
     @POST
     @Path("/create")
     @Transactional
-    public Response createFornecedor(Fornecedor fornecedor) throws ApiException {
-        Integer fornecedorId = fornecedorController.create(fornecedor);
-        return Response.ok().entity(fornecedorId).build();
+    public Response create(FornecedorDto dto) throws ApiException {
+        Fornecedor fornecedor = toEntity(dto);
+        Integer id = fornecedorController.create(fornecedor);
+        return Response.ok().entity(id).build();
     }
 
+    @Override
     @PUT
     @Path("/update")
     @Transactional
-    public Response updateFornecedor(Fornecedor fornecedor) throws ApiException{
-        return Response.ok().entity(fornecedorController.update(fornecedor)).build();
+    public Response update(FornecedorDto dto) throws ApiException {
+        Fornecedor fornecedor = toEntity(dto);
+        fornecedorController.update(fornecedor);
+        return Response.ok().entity(dto).build();
     }
 
     @Override

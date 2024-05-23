@@ -33,7 +33,7 @@ public class UsuarioResource extends CrudResource<Usuario, UsuarioDto>{
     @Path("/create")
     @Transactional
     public Response create(UsuarioDto dto) throws ApiException {
-        Integer usuarioId = usuarioController.create(super.toEntity(dto));
+        Integer usuarioId = usuarioController.create(toEntity(dto));
         return Response.ok().entity(usuarioId).build();
     }
 
@@ -42,6 +42,6 @@ public class UsuarioResource extends CrudResource<Usuario, UsuarioDto>{
     @Path("/update")
     @Transactional
     public Response update(UsuarioDto dto) throws ApiException {
-        return Response.ok().entity(toDto(usuarioController.update(super.toEntity(dto)))).build();
+        return Response.ok().entity(toDto(usuarioController.update(toEntity(dto)))).build();
     }
 }

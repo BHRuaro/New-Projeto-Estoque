@@ -1,61 +1,48 @@
 package br.inf.brunoruaro.resources;
 
 import br.inf.brunoruaro.controller.OperadorController;
+import br.inf.brunoruaro.dto.OperadorDto;
+import br.inf.brunoruaro.dto.OperadorDtoExibicao;
+import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.Operador;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+import org.modelmapper.ModelMapper;
 
 
 @Path("/operador")
-public class OperadorResource {
+public class OperadorResource extends CrudResource<Operador, OperadorDto>{
 
     @Inject
     OperadorController operadorController;
 
-    @POST
-    @Path("/create")
-    @Transactional
-    public Response createOperador(Operador operador) {
-        Integer operadorId = operadorController.operadorCreate(operador);
-        return Response.ok().entity(operadorId).build();
+    @Inject
+    ModelMapper modelMapper;
+
+    public OperadorResource() {
+        super(Operador.class, OperadorDto.class);
     }
 
-    @GET
-    @Path("/list")
-    @Transactional
-    public Response getOperadores() {
-        return Response.ok().entity(operadorController.operadorList()).build();
+    @Override
+    protected ModelMapper getModelMapper() {
+        return modelMapper;
     }
 
-    @GET
-    @Path("/find")
-    @Transactional
-    public Response findOperador(Integer operadorId) {
-        return Response.ok().entity(operadorController.operadorFind(operadorId)).build();
-    }
+    @Override
+    public Response update(OperadorDto dto) throws ApiException {
+        Operador operador = toEntity(dto);
+        crudController.update(operador);
+        OperadorDtoExibicao operadorDtoExibicao = getModelMapper().map(operador, OperadorDtoExibicao.class);
 
-    @PUT
-    @Path("/update")
-    @Transactional
-    public Response updateOperador(Operador operador) {
-        return Response.ok().entity(operadorController.operadorUpdate(operador)).build();
-    }
-    //AJUSTE: no momento seta null os campos que não forem informados
-
-    @DELETE
-    @Path("/remove")
-    @Transactional
-    public Response removeOperador(Integer operadorId) {
-        operadorController.operadorRemove(operadorId);
-        return Response.ok().build();
+        return Response.ok().entity(operadorDtoExibicao).build();
     }
 
     @POST
     @Path("/login")
     @Transactional
-    public Response loginOperador(Operador operador) {
+    public Response login(Operador operador) {
         return Response.ok().entity(operadorController.operadorLogin(operador)).build();
     }
 }

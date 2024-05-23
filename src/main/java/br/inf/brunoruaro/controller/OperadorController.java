@@ -2,36 +2,24 @@ package br.inf.brunoruaro.controller;
 
 import br.inf.brunoruaro.model.Operador;
 import br.inf.brunoruaro.dao.OperadorDAO;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
 @RequestScoped
-public class OperadorController {
+public class OperadorController extends CrudController<Operador> {
 
     @Inject
     OperadorDAO operadorDAO;
 
-    public Integer operadorCreate(Operador operador){
-        operadorDAO.add(operador);
-
-        return operador.getOperadorId();
+    @PostConstruct
+    public void init() {
+        this.dao = operadorDAO;
     }
 
-    public Operador operadorFind(Integer operadorId){
-        return operadorDAO.find(operadorId);
-    }
-
-    public void operadorRemove(Integer operadorId){
-        Operador operador = operadorDAO.find(operadorId);
-        operadorDAO.remove(operador);
-    }
-
-    public Operador operadorUpdate(Operador operador){
-        return operadorDAO.update(operador);
-    }
-
-    public Object operadorList(){
-        return operadorDAO.list();
+    @Override
+    public Integer getId(Operador entity) {
+        return entity.getOperadorId();
     }
 
     public boolean operadorLogin(Operador operador){

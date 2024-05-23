@@ -7,11 +7,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OperadorDto {
+public class OperadorDtoExibicao {
 
     private Integer operadorId;
     private String nome;
-    private String senha;
     private String cargo;
     private Float salario;
 }
