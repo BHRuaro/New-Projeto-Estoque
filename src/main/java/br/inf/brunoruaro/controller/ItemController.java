@@ -23,8 +23,8 @@ public class ItemController extends CrudController<Item>{
     }
 
     @Override
-    public Integer getId(Item entity) {
-        return entity.getItemId();
+    public Integer getId(Item item) {
+        return item.getItemId();
     }
 
     @Inject

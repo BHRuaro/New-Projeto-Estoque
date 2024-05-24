@@ -1,14 +1,15 @@
 package br.inf.brunoruaro.controller;
 
 
+import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.Movimentacao;
 import br.inf.brunoruaro.dao.MovimentacaoDAO;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import java.util.List;
 
 @RequestScoped
-public class MovimentacaoController {
+public class MovimentacaoController extends CrudController<Movimentacao>{
 
     @Inject
     MovimentacaoDAO movimentacaoDAO;
@@ -17,38 +18,31 @@ public class MovimentacaoController {
     @Inject
     ItemController itemController;
 
-        public String movimentacaoCreate(Movimentacao movimentacao) {
-            int validacao = itemController.validaQuantidadeEstoque(movimentacao);
-            if (validacao == 0) {
-                movimentacaoDAO.add(movimentacao);
-                itemController.controlaQuantidade(movimentacao);
-                historicoMovimentacaoController.adicionaHistoricoMovimentacoes(movimentacao);
-                return movimentacao.getMovimentacaoId().toString();
-            } else if (validacao == -1){
-                throw new RuntimeException("Quantidade insuficiente em estoque");
-            } else if (validacao == -2){
-                throw new RuntimeException("Quantidade excede o limite de movimentação");
-            } else if (validacao == -3) {
-                throw new RuntimeException("Quantidade inválida");
-            } else {
-                throw new RuntimeException("Erro ao criar movimentação");
-            }
+    @PostConstruct
+    public void init() { this.dao = movimentacaoDAO; }
+
+    @Override
+    public Integer getId(Movimentacao movimentacao) {
+        return movimentacao.getMovimentacaoId();
+    }
+
+
+    @Override
+    public Integer create(Movimentacao movimentacao) throws ApiException {
+        int validacao = itemController.validaQuantidadeEstoque(movimentacao);
+        if (validacao == 0) {
+            movimentacaoDAO.add(movimentacao);
+            itemController.controlaQuantidade(movimentacao);
+            historicoMovimentacaoController.create(movimentacao);
+            return movimentacao.getMovimentacaoId();
+        } else if (validacao == -1){
+            throw new ApiException("Quantidade insuficiente em estoque");
+        } else if (validacao == -2){
+            throw new ApiException("Quantidade excede o limite de movimentação");
+        } else if (validacao == -3) {
+            throw new ApiException("Quantidade inválida");
+        } else {
+            throw new ApiException("Erro ao criar movimentação");
         }
-
-    public Movimentacao movimentacaoFind(Integer movimentacaoId){
-        return movimentacaoDAO.find(movimentacaoId);
-    }
-
-    public void movimentacaoRemove(Integer movimentacaoId){
-        Movimentacao movimentacao = movimentacaoDAO.find(movimentacaoId);
-        movimentacaoDAO.remove(movimentacao);
-    }
-
-    public Movimentacao movimentacaoUpdate(Movimentacao movimentacao){
-        return movimentacaoDAO.update(movimentacao);
-    }
-
-    public List<Movimentacao> movimentacaoList(){
-        return movimentacaoDAO.list();
     }
 }

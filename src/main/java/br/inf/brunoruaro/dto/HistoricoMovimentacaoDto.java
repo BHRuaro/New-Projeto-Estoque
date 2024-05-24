@@ -2,17 +2,21 @@ package br.inf.brunoruaro.dto;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @Builder
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class MovimentacaoDto {
+@AllArgsConstructor
+public class HistoricoMovimentacaoDto {
 
+    private Integer historicoMovId;
     private Integer movimentacaoId;
-    private Integer itemId;
-    private Integer quantidade;
+    private Date data;
     private Integer tipoMovimentacaoId;
     private Integer operadorId;
     private Integer usuarioId;
+    private Integer itemId;
+    private Integer quantidade;
 }

@@ -1,42 +1,30 @@
 package br.inf.brunoruaro.controller;
 
 import br.inf.brunoruaro.dao.HistoricoCadastrosDAO;
+import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.*;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-
 import java.sql.Date;
-import java.util.List;
 
 @RequestScoped
-public class HistoricoCadastrosController {
+public class HistoricoCadastrosController extends CrudController<HistoricoCadastros>{
 
     @Inject
     HistoricoCadastrosDAO historicoCadastrosDAO;
 
-    public Integer createHistoricoCadastros(HistoricoCadastros historicoCadastros){
-        historicoCadastrosDAO.add(historicoCadastros);
-        return historicoCadastros.getHistoricoCadId();
+    @PostConstruct
+    public void init() {
+        this.dao = historicoCadastrosDAO;
     }
 
-    public HistoricoCadastros findHistoricoCadastros(Integer historicoId){
-        return historicoCadastrosDAO.find(historicoId);
+    @Override
+    public Integer getId(HistoricoCadastros entity) {
+        return entity.getHistoricoCadId();
     }
 
-    public void removeHistoricoCadastros(Integer historicoId){
-        HistoricoCadastros historicoCadastros = historicoCadastrosDAO.find(historicoId);
-        historicoCadastrosDAO.remove(historicoCadastros);
-    }
-
-    public List<HistoricoCadastros> listHistoricoCadastros(){
-        return historicoCadastrosDAO.list();
-    }
-
-    public HistoricoCadastros updateHistoricoCadastros(HistoricoCadastros historicoCadastros){
-        return historicoCadastrosDAO.update(historicoCadastros);
-    }
-
-    public void adicionaCadastro(Object object){
+    public void adicionaCadastro(Object object) throws ApiException {
         if(object instanceof Usuario usuario){
 
             insereUsuarioHistoricoCadastro(usuario);
@@ -52,33 +40,33 @@ public class HistoricoCadastrosController {
     }
 
 
-    public void insereUsuarioHistoricoCadastro(Usuario usuario){
+    public void insereUsuarioHistoricoCadastro(Usuario usuario) throws ApiException {
         HistoricoCadastros historicoCadastros = new HistoricoCadastros();
 
         historicoCadastros.setUsuario(usuario);
         historicoCadastros.setData(new Date(System.currentTimeMillis()));
         historicoCadastros.setOperador(usuario.getOperador());
 
-        createHistoricoCadastros(historicoCadastros);
+        create(historicoCadastros);
     }
 
-    public void insereItemHistoricoCadastro(Item item){
+    public void insereItemHistoricoCadastro(Item item) throws ApiException {
         HistoricoCadastros historicoCadastros = new HistoricoCadastros();
 
         historicoCadastros.setItem(item);
         historicoCadastros.setData(new Date(System.currentTimeMillis()));
         historicoCadastros.setOperador(item.getOperador());
 
-        createHistoricoCadastros(historicoCadastros);
+        create(historicoCadastros);
     }
 
-    public void insereFornecedorHistoricoCadastro(Fornecedor fornecedor){
+    public void insereFornecedorHistoricoCadastro(Fornecedor fornecedor) throws ApiException {
         HistoricoCadastros historicoCadastros = new HistoricoCadastros();
 
         historicoCadastros.setFornecedor(fornecedor);
         historicoCadastros.setData(new Date(System.currentTimeMillis()));
         historicoCadastros.setOperador(fornecedor.getOperador());
 
-        createHistoricoCadastros(historicoCadastros);
+        create(historicoCadastros);
     }
 }

@@ -1,57 +1,49 @@
 package br.inf.brunoruaro.controller;
 
+import br.inf.brunoruaro.error.ApiException;
 import br.inf.brunoruaro.model.HistoricoMovimentacoes;
 import br.inf.brunoruaro.dao.HistoricoMovimentacoesDAO;
 import br.inf.brunoruaro.model.Movimentacao;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-
 import java.sql.Date;
-import java.util.List;
 
 @RequestScoped
-public class HistoricoMovimentacaoController {
+public class HistoricoMovimentacaoController extends CrudController<HistoricoMovimentacoes>{
 
     @Inject
     HistoricoMovimentacoesDAO historicoMovimentacoesDAO;
 
-    public Integer createHistoricoMovimentacoes(HistoricoMovimentacoes historicoMovimentacoes){
-        historicoMovimentacoesDAO.add(historicoMovimentacoes);
-        return historicoMovimentacoes.getHistoricoMovId();
+    @PostConstruct
+    public void init() {
+        this.dao = historicoMovimentacoesDAO;
     }
 
-    public HistoricoMovimentacoes findHistoricoMovimentacoes(Integer historicoId){
-        return historicoMovimentacoesDAO.find(historicoId);
+    @Override
+    public Integer getId(HistoricoMovimentacoes entity) {
+        return entity.getHistoricoMovId();
     }
 
-    public void removeHistoricoMovimentacoes(Integer historicoId){
-        HistoricoMovimentacoes historicoMovimentacoes = historicoMovimentacoesDAO.find(historicoId);
-        historicoMovimentacoesDAO.remove(historicoMovimentacoes);
-    }
+    public void create(Movimentacao movimentacao) throws ApiException{
 
-    public List<HistoricoMovimentacoes> listHistoricoMovimentacoes(){
-        return historicoMovimentacoesDAO.list();
-    }
+        try{
+            HistoricoMovimentacoes historicoMovimentacoes = new HistoricoMovimentacoes();
 
-    public HistoricoMovimentacoes updateHistoricoMovimentacoes(HistoricoMovimentacoes historicoMovimentacoes){
-        return historicoMovimentacoesDAO.update(historicoMovimentacoes);
-    }
+            historicoMovimentacoes.setMovimentacao(movimentacao);
+            historicoMovimentacoes.setData(new Date(System.currentTimeMillis()));
+            historicoMovimentacoes.setTipoMovimentacao(movimentacao.getTipoMovimentacao());
+            historicoMovimentacoes.setItem(movimentacao.getItem());
+            historicoMovimentacoes.setQuantidade(movimentacao.getQuantidade());
+            historicoMovimentacoes.setOperador(movimentacao.getOperador());
 
-    public void adicionaHistoricoMovimentacoes(Movimentacao movimentacao) {
+            if (movimentacao.getTipoMovimentacao().getTipoMovimentacaoId() == 2) {
+                historicoMovimentacoes.setUsuario(movimentacao.getUsuario());
+            }
 
-        HistoricoMovimentacoes historicoMovimentacoes = new HistoricoMovimentacoes();
-
-        historicoMovimentacoes.setMovimentacao(movimentacao);
-        historicoMovimentacoes.setData(new Date(System.currentTimeMillis()));
-        historicoMovimentacoes.setTipoMovimentacao(movimentacao.getTipoMovimentacao());
-        historicoMovimentacoes.setItem(movimentacao.getItem());
-        historicoMovimentacoes.setQuantidade(movimentacao.getQuantidade());
-        historicoMovimentacoes.setOperador(movimentacao.getOperador());
-
-        if (movimentacao.getTipoMovimentacao().getTipoMovimentacaoId() == 2) {
-            historicoMovimentacoes.setUsuario(movimentacao.getUsuario());
+            historicoMovimentacoesDAO.add(historicoMovimentacoes);
+        }catch (Exception e){
+            throw new ApiException("Erro ao criar histórico de movimentação");
         }
-
-        historicoMovimentacoesDAO.add(historicoMovimentacoes);
     }
 }
