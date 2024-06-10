@@ -42,7 +42,7 @@ public class Usuario {
     @JsonIgnore
     private List<HistoricoMovimentacoes> historicoMovimentacoes;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<HistoricoCadastros> historicoCadastros;
 }

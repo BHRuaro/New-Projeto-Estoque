@@ -55,6 +55,14 @@ public class UsuarioController extends CrudController<Usuario>{
         }
     }
 
+    public Usuario findByCpf(Long cpf) throws ApiException {
+        if (usuarioDAO.findByCpf(cpf) != null){
+            return usuarioDAO.findByCpf(cpf);
+        }else {
+            throw new ApiException("Usuário não encontrado");
+        }
+    }
+
     public static boolean validaCadastro(Usuario usuario) throws ApiException{
         if(usuario.getNome() == null || usuario.getNome().isEmpty()){
             throw new ApiException("Nome do usuário não pode ser vazio");

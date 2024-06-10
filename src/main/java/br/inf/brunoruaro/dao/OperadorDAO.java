@@ -11,13 +11,5 @@ public class OperadorDAO extends DAO<Operador> {
         return Operador.class;
     }
 
-    public boolean login(Operador operador) {
-        List<Operador> operadores = super.list();
-        for (Operador o : operadores) {
-            if (o.getNome().equals(operador.getNome()) && o.getSenha().equals(operador.getSenha())) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

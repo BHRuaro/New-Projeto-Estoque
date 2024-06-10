@@ -42,7 +42,7 @@ public class OperadorResource extends CrudResource<Operador, OperadorDto>{
     @POST
     @Path("/login")
     @Transactional
-    public Response login(Operador operador) {
+    public Response login(Operador operador) throws ApiException {
         return Response.ok().entity(operadorController.operadorLogin(operador)).build();
     }
 }

@@ -10,4 +10,14 @@ public class UsuarioDAO extends DAO<Usuario>{
     public Class<Usuario> getEntityClass() {
         return Usuario.class;
     }
+
+    public Usuario findByCpf(Long cpf) {
+        try {
+            return em.createQuery("SELECT u FROM Usuario u WHERE u.cpf = :cpf", Usuario.class)
+                    .setParameter("cpf", cpf)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
